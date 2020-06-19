@@ -4,8 +4,13 @@ body {
 }
 .display-3 
 
-{background-color: #34eb52;
+{background-color: #eb344c;
   position: static;
   left: 50%;
   top: 50%;
+}
+.jumbotron
+{
+background-color: #80eb34;	
+	
 }
