@@ -21,7 +21,7 @@
       "image": "worldviews.png"
     },
     {
-      "image": "toyokawa.jpg",
+      "image": "worldviews.png",
       "name": "TeleViewer",
       "description": "Our first  project was TeleViewer, which is a digital earth supporting many different ways to see the world or any part of the world. These may be based on images, video, computer graphics, or live streamed views, telepresence robotic views, etc. It is inspired by Google Eath, StreetView and many great related projects, but we seek to build open source tools with core content in the creative commons. Our ultimate vision is to have free tools available to anyone to let them see the world or any part of the world in useful and inspiring ways."
     },
