@@ -1,7 +1,7 @@
 
 .jumbotron {
 	max-width: relative;
- height: 320px;
+ height: 305px;
   background-color: #80eb34;
 }
 @media (min-width: 768px) {
@@ -21,7 +21,7 @@
 }
 
 .jumbotron .container {
-  max-width: 40rem;
+  max-width: 100rem;
 }
 
 footer {
