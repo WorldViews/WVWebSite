@@ -1,0 +1,11 @@
+/* Move down content because we have a fixed navbar that is 3.5rem tall */
+body {
+  padding-top: 3.5rem;
+}
+.display-3 
+
+{background-color: #34eb52;
+  position: static;
+  left: 50%;
+  top: 50%;
+}
