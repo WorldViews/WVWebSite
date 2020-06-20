@@ -1,24 +1,6 @@
 "use strict";
 
 var PROJECTS = {
-    projects: [
-        {
-            "name": "Garden",
-            "description": "The Garden was created as a way to bring people and organizations together to work, play and dance. Some of its activities are in the form of service or creative projects, some are classes or workshops, some are performances, and some are open space mixers with no agenda."
-        },
-        {
-            "name": "Project 2",
-            "description": "XXkkdk dkdkd kdkdkd dkdkdk dkdkd kdkdddd ekekekke kekeke kekeke"
-        },
-        {
-            "name": "Project 3",
-            "description": " "
-        },
-
-    ]
-}
-
-var XXPROJECTS = {
     "projects": [
         {
             "name": "The Garden",
@@ -76,10 +58,29 @@ function getDiv() {
 
 class ProjectDB {
     constructor() {
+        this.projectsObj;
+        this.projectsById = {};
+        this.allowEdits = false;
+        var inst = this;
+        $("#updateProject").click(() => {
+            inst.updateProject();
+        });
+    }
+
+    updateDB() {
+        var jstr = JSON.stringify(this.projectsObj, null, 3);
+        console.log("ProjectsObj:\n", jstr);
     }
 
     async getProjects() {
         var projectsObj = await loadJSON("projects.json");
+        this.projectsObj = projectsObj;
+        projectsObj.projects.forEach(proj => {
+            if (!proj.id) {
+                proj.id = proj.name.replace(/ /g, "_");
+            }
+            this.projectsById[proj.id] = proj;
+        });
         return projectsObj;
     }
 
@@ -92,31 +93,53 @@ class ProjectDB {
         });
     }
 
+    updateProject() {
+        var proj = this.currentProject;
+        if (proj) {
+            var editor = tinymce.get('editArea');
+            var content = editor.getContent();
+            proj.description = content;
+            console.log("project", proj.id, content);
+        }
+        this.updateDB();
+    }
+
+    editProject(proj) {
+        this.currentProject = proj;
+        console.log("editProj", proj);
+        //$("#editArea").html(proj.description);
+        var editor = tinymce.get('editArea');
+        var content = editor.getContent();
+        ///content = content.replace(/{\$baseurl}/g, 'http://mydomain.com');
+        editor.setContent(proj.description);
+    }
+
     getProjectDiv(project) {
-        var div = getDiv();
-        var item = "<b>NAME</b><p>DESC";
+        var inst = this;
+        project.id = project.name.replace(/ /g, "_");
+        let bid = 'edit' + project.id;
+        let div = getDiv();
+        let item = "<b>NAME</b><p>DESC";
         item = item.replace("NAME", project.name)
         item = item.replace("DESC", project.description);
         if (project.image) {
             item = sprintf("<img src='%s' class='proj-img'><br>", project.image) + item;
         }
         // $('.grid').masonry().append(item);
+        item += '<br>';
+        if (this.allowEdits) {
+            let bstr = sprintf('<input id="%s" type="button" value="edit">', bid);
+            console.log("button:", bid, bstr);
+            item += bstr;
+        }
         div.html(item);
+        if (this.allowEdits) {
+            $("#" + bid).click(e => {
+                console.log("edit", bid);
+                inst.editProject(project);
+            });
+        }
         return div;
     }
 }
 
-
-$(document).ready(async e => {
-    //alert("hello");
-    var pdb = new ProjectDB();
-    await pdb.loadProjects();
-   // await loadProjects();
-    $('.grid').masonry({
-        //$('#projectListDiv').masonry({
-        // options
-        itemSelector: '.grid-item',
-        columnWidth: 120
-    });
-    // loadProjects();
-});
