@@ -62,7 +62,13 @@
         .editArea {
             width: 100%;
             height: 200px;
+            margin: 20px;
         }
+
+        .inputArea {
+            width: 600px
+        }
+
     </style>
     <!-- Custom styles for this template -->
     <link href="album.css" rel="stylesheet">
@@ -84,6 +90,7 @@
     </header>
 
     <main role="main">
+        <!--
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -122,20 +129,14 @@
                 </form>
             </div>
         </nav>
-
-        <section class="jumbotron text-center">
-            <div class="container">
-                <h1>Projects of WorldViews & </br>The Garden</h1>
-                <p>One of the main objectives of both WorldViews and The Garden is to facilitate a collaboration
-                    of
-                    humans throughout the world. We will be making a space for people to work on various
-                    projects. This
-                    is just a sample of some of our completed projects.</p>
-            </div>
-        </section>
-        <textarea id="editArea" class="editArea"></textarea>
+    -->
+    Project Id: <input id="projectId" class="inputArea"><br>
+    Project Name: <input id="projectName" class="inputArea">
+    <textarea id="editArea" class="editArea"></textarea>
         <input id="updateProject" type="submit" value="Update Project">
-        <input id="cancelButton" type="button" value="Cancel" onclick="cancelEdit()">
+        <input id="cancelButton" type="button" value="Cancel">
+        <p></p>&nbsp;<p></p>
+        <input id="deleteButton" type="button" value="Delete">
 
         <div id="projectListDiv" class="grid">
         </div>
@@ -175,12 +176,17 @@
         $(document).ready(async e => {
             var pdb = new ProjectDB();
             pdb.allowEdits = true;
+            var projectId = getParameterByName("projectId");
             await pdb.loadProjects();
+            /*
             $('.grid').masonry({
                 itemSelector: '.grid-item',
                 columnWidth: 120
             });
-            // loadProjects();
+            */
+            if (projectId) {
+                pdb.editProject(projectId);
+            }
         });
 
     </script>

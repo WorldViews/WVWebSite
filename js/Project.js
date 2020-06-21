@@ -62,60 +62,138 @@ class ProjectDB {
         this.projectsById = {};
         this.allowEdits = false;
         var inst = this;
-        $("#updateProject").click(() => {
-            inst.updateProject();
-        });
+        this.setupGUI();
     }
 
-    updateDB() {
-        var jstr = JSON.stringify(this.projectsObj, null, 3);
-        console.log("ProjectsObj:\n", jstr);
-        var fname = "projects.json";
-        uploadDataToFile("/", jstr, fname);
-
-    }
-
-    async getProjects() {
+    async loadProjects() {
+        var inst = this;
         var projectsObj = await loadJSON("projects.json");
         this.projectsObj = projectsObj;
         projectsObj.projects.forEach(proj => {
-            if (!proj.id) {
-                proj.id = proj.name.replace(/ /g, "_");
-            }
+            inst.checkId(proj);
             this.projectsById[proj.id] = proj;
         });
         return projectsObj;
     }
 
-    async loadProjects() {
+    checkId(proj) {
+        if (!proj.id || proj.id=="" || proj.id == "NEW") {
+            proj.id = proj.name.replace(/ /g, "_");
+        }
+    }
+
+    async updateDB() {
+        var jstr = JSON.stringify(this.projectsObj, null, 3);
+        console.log("ProjectsObj:\n", jstr);
+        var fname = "projects.json";
+        return uploadDataToFile("/", jstr, fname);
+    }
+
+    setupGUI() {
+        var inst = this;
+        $("#updateProject").click(() => {
+            inst.updateProject();
+        });
+        $("#cancelButton").click(() => {
+            inst.launchProjectList();
+        });
+        $("#deleteButton").click(() => {
+            inst.deleteProject(inst.currentProj);
+        });
+    }
+
+    // This is called from GUI to delete a project
+    async deleteProject(proj) {
+        if (!proj)
+            proj = this.currentProject;
+        var projs = this.projectsObj.projects;
+        var i=-1;
+        for (var j=0; j<projs.length; j++) {
+            if (projs[j].id == proj.id)
+                i = j;
+        }
+       if (i >= 0) {
+          projs.splice( i, 1 );
+        }
+        else {
+            alert("cannot find project to delete");
+        }
+        await this.updateDB();
+        this.launchProjectList();
+    }
+
+
+    async layoutProjects() {
         //projects = PROJECTS.projects;
-        var projectsObj = await this.getProjects();
+        var inst = this;
+        var projectsObj = await this.loadProjects();
         var projects = projectsObj.projects;
         projects.forEach(project => {
             var div = this.getProjectDiv(project);
         });
-    }
-
-    updateProject() {
-        var proj = this.currentProject;
-        if (proj) {
-            var editor = tinymce.get('editArea');
-            var content = editor.getContent();
-            proj.description = content;
-            console.log("project", proj.id, content);
+        if (this.allowEdits) {
+            //let bstr = sprintf('<input id="%s" type="button" value="edit">', bid);
+            $("#createProject").click(e => inst.createProject())
         }
-        this.updateDB();
     }
 
-    editProject(proj) {
+    createProject() {
+        console.log("*** create New Project");
+        var url = "projectEdit.html?projectId=NEW";
+        window.open(url, "_self");
+    }
+
+    // called from GUI to update the project being editd.
+    async updateProject() {
+        var proj = this.currentProject;
+        var editor = tinymce.get('editArea');
+        var content = editor.getContent();
+        proj.id = $("#projectId").val();
+        proj.name = $("#projectName").val();
+        proj.description = content;
+        if (proj.name == "" || !proj.name) {
+            alert("Name required for projects");
+            return;
+        }
+        this.checkId(proj);
+        await this.updateDB();
+        this.launchProjectList();
+    }
+
+    launchProjectList() {
+        var url = "projectList.html?edit=True";
+        window.open(url, "_self");
+    }
+
+    // called to change to a new webpage for editing a project
+    launchEditProject(projId) {
+        var url = "projectEdit.html?projectId=" + projId;
+        window.open(url, "_self");
+    }
+
+    editProject(projId) {
+        var proj = this.projectsById[projId];
+        this.isNewProj = false;
+        if (projId == "NEW") {
+            console.log("*** create new project");
+            this.isNewProj = true;
+            proj = {name:'', id: "", description: ""};
+            this.projectsObj.projects.push(proj);
+        }
         this.currentProject = proj;
         console.log("editProj", proj);
+        $("#projectId").val(projId);
+        $("#projectName").val(proj.name);
         //$("#editArea").html(proj.description);
+        if (proj == null) {
+            alert("No project with id", projId);
+        }
         var editor = tinymce.get('editArea');
         var content = editor.getContent();
         ///content = content.replace(/{\$baseurl}/g, 'http://mydomain.com');
         editor.setContent(proj.description);
     }
+
 
     getProjectDiv(project) {
         var inst = this;
@@ -139,7 +217,7 @@ class ProjectDB {
         if (this.allowEdits) {
             $("#" + bid).click(e => {
                 console.log("edit", bid);
-                inst.editProject(project);
+                inst.launchEditProject(project.id);
             });
         }
         return div;

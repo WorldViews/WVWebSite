@@ -30,10 +30,11 @@ https://www.html5canvastutorials.com/advanced/html5-canvas-blooming-flowers-effe
         var obj = { "type": "json_string", "name": "string 1", "description": "This is a sample string" };
         var jstr = JSON.stringify(obj, null, 3);
 
-        function handleUpload() {
+        async function handleUpload() {
             var fname = "foobar.json";
             console.log("handle upload", fname, obj);
-            uploadDataToFile("/", jstr, fname);
+            var res = await asyncUploadDataToFile("/", jstr, fname);
+            console.log("res:", res);
         }
 
         $(document).ready(function () {
