@@ -70,6 +70,9 @@ class ProjectDB {
     updateDB() {
         var jstr = JSON.stringify(this.projectsObj, null, 3);
         console.log("ProjectsObj:\n", jstr);
+        var fname = "projects.json";
+        uploadDataToFile("/", jstr, fname);
+
     }
 
     async getProjects() {
