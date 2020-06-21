@@ -2,9 +2,11 @@
    "projects": [
       {
          "name": "The Garden",
-         "description": "The Garden was created as a way to bring people and organizations together to work, play and dance. Some of its activities are in the form of service or creative projects, some are classes or workshops, some are performances, and some are open space mixers with no agenda.",
+         "description": "<p>The Garden was created as a way to bring people and organizations together to work, play and dance. Some of its activities are in the form of service or creative projects, some are classes or workshops, some are performances, and some are open space mixers with no agenda.</p>",
          "image": "images/community.jpg",
-         "id": "The_Garden"
+         "id": "The_Garden",
+         "imageURL": "images/community.jpg",
+         "infoURL": "http://worldviews.org/site"
       },
       {
          "name": "WorldViews Organization and Community",
@@ -33,8 +35,10 @@
       {
          "image": "images/toyokawa.jpg",
          "name": "Cupertino - Toyokawa Sister City Program",
-         "description": "WorldViews is interested in ways to help connect people and share experiences across sister cities. We are working with the Cupertino Toyokawa Sister Cities program to explore ways to do this. Our first effort at this will be during the Cupertino Cherry Blossom Festival.",
-         "id": "Cupertino_-_Toyokawa_Sister_City_Program"
+         "description": "<p>WorldViews is interested in ways to help connect people and share experiences across sister cities. We are working with the Cupertino Toyokawa Sister Cities program to explore ways to do this. Our first effort at this will be during the Cupertino Cherry Blossom Festival.</p>",
+         "id": "Cupertino_-_Toyokawa_Sister_City_Program",
+         "imageURL": "images/toyokawa.jpg",
+         "infoURL": "https://www.cupertinocherryblossomfestival.org/"
       },
       {
          "image": "images/polly-med.jpg",
@@ -51,7 +55,9 @@
       {
          "name": "Dance4Healing",
          "id": "Dance4Healing",
-         "description": "<h2 class=\"section-heading text-uppercase\"><img src=\"http://dance4healing.com/sandbox/img/d4h/class3.jpg\" width=\"369\" height=\"205\" /></h2>\n<h2 class=\"section-heading text-uppercase\">DANCE4HEALING</h2>\n<h3 class=\"section-subheading text-muted\">Educating, empowering, and inspiring anyone to leverage technology to build healthy habits with creative arts in a fun, easy way.</h3>\n<p>See <a href=\"http://dance4healing.com/sandbox/index.html\">Dance4Healing</a></p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>"
+         "description": "<h2 class=\"section-heading text-uppercase\"><img src=\"http://dance4healing.com/sandbox/img/d4h/class3.jpg\" width=\"369\" height=\"205\" /></h2>\n<h2 class=\"section-heading text-uppercase\">DANCE4HEALING</h2>\n<h3 class=\"section-subheading text-muted\">Educating, empowering, and inspiring anyone to leverage technology to build healthy habits with creative arts in a fun, easy way.</h3>\n<p>See <a href=\"http://dance4healing.com/sandbox/index.html\">Dance4Healing</a></p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>",
+         "imageURL": "http://dance4healing.com/sandbox/img/d4h/d4hlogowtagline_sm.png",
+         "infoURL": "http://dance4healing.com"
       },
       {
          "name": "Taiko-IN",
@@ -61,7 +67,9 @@
       {
          "name": "Planting Justice",
          "id": "Planting_Justice",
-         "description": "<p><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://images.squarespace-cdn.com/content/v1/531f8717e4b0fcd5fdbf0e6f/1531867075009-LFVVXTJY9Y6XP3RX6FZO/ke17ZwdGBToddI8pDm48kL5VdYVlKyCDq3kfJ3hoZSlZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwNGpxh-WAYFXjy0UmE-nnft2QW2Hz77nDM2hjrqnm4ORRoiD5g_uKOgf8UH8HqJwA/new.pjlogo_white_interior.png?format=300w\" alt=\"new.pjlogo_white_interior.png\" width=\"197\" height=\"211\" /></p>\n<h3><a href=\"https://plantingjustice.org/\">Planting Justice</a> is a grassroots organization with a mission to empower people impacted by mass incarceration and other social inequities with the skills and resources to cultivate food sovereignty, economic justice, and community healing.&nbsp;</h3>"
+         "description": "<p><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://images.squarespace-cdn.com/content/v1/531f8717e4b0fcd5fdbf0e6f/1531867075009-LFVVXTJY9Y6XP3RX6FZO/ke17ZwdGBToddI8pDm48kL5VdYVlKyCDq3kfJ3hoZSlZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwNGpxh-WAYFXjy0UmE-nnft2QW2Hz77nDM2hjrqnm4ORRoiD5g_uKOgf8UH8HqJwA/new.pjlogo_white_interior.png?format=300w\" alt=\"new.pjlogo_white_interior.png\" width=\"197\" height=\"211\" /></p>\n<h3><a href=\"https://plantingjustice.org/\">Planting Justice</a> is a grassroots organization with a mission to empower people impacted by mass incarceration and other social inequities with the skills and resources to cultivate food sovereignty, economic justice, and community healing.&nbsp;</h3>",
+         "imageURL": "https://images.squarespace-cdn.com/content/v1/531f8717e4b0fcd5fdbf0e6f/1531867075009-LFVVXTJY9Y6XP3RX6FZO/ke17ZwdGBToddI8pDm48kL5VdYVlKyCDq3kfJ3hoZSlZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwNGpxh-WAYFXjy0UmE-nnft2QW2Hz77nDM2hjrqnm4ORRoiD5g_uKOgf8UH8HqJwA/new.pjlogo_white_interior.png?format=300w",
+         "infoURL": "https://plantingjustice.org/"
       },
       {
          "name": "Kinetech Arts",

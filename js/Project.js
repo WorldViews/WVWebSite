@@ -150,6 +150,12 @@ class ProjectDB {
         var content = editor.getContent();
         proj.id = $("#projectId").val();
         proj.name = $("#projectName").val();
+        var imageURL = $("#imageURL").val();
+        var infoURL = $("#infoURL").val();
+        if (imageURL)
+            proj.imageURL = imageURL;
+        if (infoURL)
+            proj.infoURL = infoURL;
         proj.description = content;
         if (proj.name == "" || !proj.name) {
             alert("Name required for projects");
@@ -171,6 +177,7 @@ class ProjectDB {
         window.open(url, "_self");
     }
 
+    // called to set up things for editing project on this webpage
     editProject(projId) {
         var proj = this.projectsById[projId];
         this.isNewProj = false;
@@ -184,6 +191,8 @@ class ProjectDB {
         console.log("editProj", proj);
         $("#projectId").val(projId);
         $("#projectName").val(proj.name);
+        $("#imageURL").val(proj.image);
+        $("#infoURL").val(proj.infoURL);
         //$("#editArea").html(proj.description);
         if (proj == null) {
             alert("No project with id", projId);
