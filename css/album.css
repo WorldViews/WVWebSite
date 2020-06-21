@@ -1,11 +1,12 @@
 
+      
 .jumbotron {
- height: 200px;
+ height: relative;
  width: relative;
   background-color: #80ff80;
   
 }
-@media (min-width: 768px) {
+@media (min-width: 500px) {
   .jumbotron {
     padding-top: 3rem;
     padding-bottom: 6rem;
