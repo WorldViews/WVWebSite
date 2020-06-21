@@ -58,6 +58,11 @@
             padding: 4px;
             margin: 4px;
         }
+
+        .editArea {
+            width: 100%;
+            height: 200px;
+        }
     </style>
     <!-- Custom styles for this template -->
     <link href="album.css" rel="stylesheet">
@@ -65,11 +70,12 @@
 
 <body>
     </style>
-    <!--
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
-    -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>
+            //tinymce.init({ selector: 'textarea' });
+    </script>
+
     <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.js"></script>
     <script src="js/util.js"></script>
     <script src="js/sprintf.js"></script>
@@ -127,10 +133,13 @@
                     is just a sample of some of our completed projects.</p>
             </div>
         </section>
+        <textarea id="editArea" class="editArea"></textarea>
+        <input id="updateProject" type="submit" value="Update Project">
+        <input id="cancelButton" type="button" value="Cancel" onclick="cancelEdit()">
+
         <div id="projectListDiv" class="grid">
         </div>
     </main>
-
     <footer class="text-muted">
         <div class="container">
             <p class="float-right">
@@ -138,15 +147,34 @@
             </p>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
-        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
-        crossorigin="anonymous"></script>
     <script>
+        tinymce.init({
+            selector: 'textarea',
+            height: 500,
+            theme: 'modern',
+            plugins: [
+                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'insertdatetime media nonbreaking save table contextmenu directionality',
+                'emoticons template paste textcolor colorpicker textpattern imagetools'
+            ],
+            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            toolbar2: 'print preview media | forecolor backcolor emoticons',
+            image_advtab: true,
+            templates: [
+                { title: 'Test template 1', content: 'Test 1' },
+                { title: 'Test template 2', content: 'Test 2' }
+            ],
+            content_css: [
+                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                '//www.tinymce.com/css/codepen.min.css'
+            ]
+        });
+
+
         $(document).ready(async e => {
             var pdb = new ProjectDB();
+            pdb.allowEdits = true;
             await pdb.loadProjects();
             $('.grid').masonry({
                 itemSelector: '.grid-item',
@@ -154,6 +182,8 @@
             });
             // loadProjects();
         });
+
     </script>
+</body>
 
 </html>
