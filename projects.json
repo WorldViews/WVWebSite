@@ -122,6 +122,13 @@
          "description": "<p><a href=\"https://limitlesshorizonsixil.org/\"><img src=\"https://limitlesshorizonsixil.org/wp-content/uploads/2013/11/Logo-with-tagline-for-website2.png\" /></a></p>\n<p>Cecillia is lives in Chajul Guatamala, and is getting a college degree on computer technology.</p>\n<p>She is being sponsored by some of the Garden teem.</p>\n<p>&nbsp;</p>",
          "infoURL": "https://limitlesshorizonsixil.org/",
          "projectType": "project"
+      },
+      {
+         "name": "The Grand Canyon Adaptive Hike",
+         "id": "The_Grand_Canyon_Adaptive_Hike",
+         "description": "<div id=\"i4c-draggable-container\" style=\"position: fixed; z-index: 1499; width: 0px; height: 0px;\">\n<div class=\"resolved\" style=\"all: initial;\" data-reactroot=\"\">&nbsp;</div>\n</div>\n<p><img src=\"https://www.nps.gov/grca/planyourvisit/images/powell-pt-640.jpg?maxwidth=650&amp;autorotate=false\" alt=\"Basic Information - Grand Canyon National Park (U.S. National Park ...\" width=\"382\" height=\"256\" /></p>\n<p>Enock will be hiking the Grand Canyon on a handcycle.</p>\n<div id=\"i4c-dialogs-container\">&nbsp;</div>\n<div id=\"i4c-dialogs-container\">&nbsp;</div>\n<div id=\"i4c-dialogs-container\">&nbsp;</div>",
+         "infoURL": "https://gobeyondthefence.com",
+         "projectType": "project"
       }
    ]
 }
