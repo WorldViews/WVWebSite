@@ -152,10 +152,13 @@ class ProjectDB {
         proj.name = $("#projectName").val();
         var imageURL = $("#imageURL").val();
         var infoURL = $("#infoURL").val();
+        var projectType = $("#projectType").val();
         if (imageURL)
             proj.imageURL = imageURL;
         if (infoURL)
             proj.infoURL = infoURL;
+        if (projectType)
+            proj.projectType = projectType;
         proj.description = content;
         if (proj.name == "" || !proj.name) {
             alert("Name required for projects");
@@ -193,6 +196,7 @@ class ProjectDB {
         $("#projectName").val(proj.name);
         $("#imageURL").val(proj.image);
         $("#infoURL").val(proj.infoURL);
+        $("#projectType").val(proj.projectType);
         //$("#editArea").html(proj.description);
         if (proj == null) {
             alert("No project with id", projId);
