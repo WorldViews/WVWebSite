@@ -10,7 +10,7 @@
       },
       {
          "name": "WorldViews Organization and Community",
-         "description": "The mission of this project is to create and nurture a vibrant community of people working on WorldViews, enjoying the project, or using it to share views of the world.",
+         "description": "<p>&nbsp;</p>\n<p>The mission of this project is to create and nurture a vibrant community of people working on WorldViews, enjoying the project, or using it to share views of the world.</p>",
          "imageURL": "images/virtualtour.jpg",
          "id": "WorldViews_Organization_and_Community",
          "infoURL": "https://worldviews.org"
@@ -155,6 +155,14 @@
          "infoURL": "https://gobeyondthefence.com",
          "projectType": "project",
          "imageURL": "https://www.nps.gov/grca/planyourvisit/images/powell-pt-640.jpg?maxwidth=650&autorotate=false"
+      },
+      {
+         "name": "Latham COMMUNITY garden",
+         "id": "Latham_COMMUNITY_garden",
+         "description": "<h1><img src=\"https://www.mountainview.gov/images/Web__Dahlia.jpg\" /></h1>\n<h1>Latham COMMUNITY garden</h1>\n<p>In June 2015, following months of staff review, and recommendation by the Parks and Recreation Commission, the Mountain View City Council approved the .8 acre City owned property on the corner of Shoreline Blvd and Latham Street as the location for a plot-based community garden.&nbsp; Eighty four (84)&nbsp; plots, 6ft wide by 18ft long, have been created on this site.&nbsp;This includes limited amounts of ADA plots, short-term plots, and reduced rate plots for low-income families. Latham Community Garden opened in August 2019.</p>\n<p>&nbsp;</p>\n<p>All plots are currently filled.&nbsp;To be added to the waitlist, send an email with your full name, mailing address and phone number to&nbsp;<a href=\"mailto:gardens@mountainview.gov\">gardens@mountainview.gov</a>.</p>",
+         "imageURL": "https://www.mountainview.gov/images/Web__Dahlia.jpg",
+         "infoURL": "https://www.mountainview.gov/depts/cs/rec/facilities/garden.asp",
+         "projectType": "organization"
       }
    ]
 }
