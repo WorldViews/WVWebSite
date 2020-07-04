@@ -65,9 +65,47 @@ class ProjectDB {
         this.setupGUI();
     }
 
+    getFirebaseDB() {
+        if (this.firebaseDB)
+            return this.firebaseDB;
+        var firebaseConfig = {
+            apiKey: "AIzaSyBqAsqHaBZGT-UsC82ShV3koGWWgu-l8to",
+            authDomain: "fir-helloworld-39759.firebaseapp.com",
+            databaseURL: "https://fir-helloworld-39759.firebaseio.com",
+            projectId: "fir-helloworld-39759",
+            storageBucket: "fir-helloworld-39759.appspot.com",
+            messagingSenderId: "1080893233748",
+            appId: "1:1080893233748:web:1614aab0d167c094322bc1"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        this.firebaseDB = firebase.database();
+        console.log("db:", this.firebaseDB);
+        return this.firebaseDB;
+    }
+
+    loadProjectsFromFirebase() {
+        var db = this.getFirebaseDB();
+        console.log("db:", db);
+        //var dbRef = db.ref('/text');
+        var dbRef = db.ref();
+        console.log("Got dbRef", dbRef);
+        return new Promise((res, rej) => {
+            dbRef.on('value', snap => {
+                console.log("Got", snap);
+                var obj = snap.val();
+                console.log("obj", obj);
+                var jstr = JSON.stringify(obj, null, 3);
+                console.log("projects", jstr);
+                res(obj.topics);
+            });
+        })
+    }
+
     async loadProjects() {
         var inst = this;
-        var projectsObj = await loadJSON("projects.json");
+        //var projectsObj = await loadJSON("projects.json");
+        var projectsObj = await this.loadProjectsFromFirebase();
         this.projectsObj = projectsObj;
         projectsObj.projects.forEach(proj => {
             inst.checkId(proj);
@@ -77,12 +115,28 @@ class ProjectDB {
     }
 
     checkId(proj) {
-        if (!proj.id || proj.id=="" || proj.id == "NEW") {
+        if (!proj.id || proj.id == "" || proj.id == "NEW") {
             proj.id = proj.name.replace(/ /g, "_");
         }
     }
 
     async updateDB() {
+        //return this.updateProjectsFile();
+        return this.updateFirebaseDB();
+    }
+
+    async updateFirebaseDB() {
+        console.log("update firebase");
+        var db = this.getFirebaseDB();
+        console.log("db:", db);
+        //var dbRef = db.ref('/text');
+        var dbRef = db.ref();
+        console.log("Got dbRef", dbRef);
+        await dbRef.child("topics").set(this.projectsObj);
+        console.log("Successfully updated");
+    }
+
+    async updateProjectsFile() {
         var jstr = JSON.stringify(this.projectsObj, null, 3);
         console.log("ProjectsObj:\n", jstr);
         var fname = "projects.json";
@@ -107,13 +161,13 @@ class ProjectDB {
         if (!proj)
             proj = this.currentProject;
         var projs = this.projectsObj.projects;
-        var i=-1;
-        for (var j=0; j<projs.length; j++) {
+        var i = -1;
+        for (var j = 0; j < projs.length; j++) {
             if (projs[j].id == proj.id)
                 i = j;
         }
-       if (i >= 0) {
-          projs.splice( i, 1 );
+        if (i >= 0) {
+            projs.splice(i, 1);
         }
         else {
             alert("cannot find project to delete");
@@ -187,7 +241,7 @@ class ProjectDB {
         if (projId == "NEW") {
             console.log("*** create new project");
             this.isNewProj = true;
-            proj = {name:'', id: "", description: ""};
+            proj = { name: '', id: "", description: "" };
             this.projectsObj.projects.push(proj);
         }
         this.currentProject = proj;
