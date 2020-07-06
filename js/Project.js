@@ -114,9 +114,16 @@ class ProjectDB {
         return projectsObj;
     }
 
+    uniqueId() {
+        var id = 'proj_'+getClockTime();
+        id = id.replace(/\./g, "_");
+        return id;
+    }
+
     checkId(proj) {
         if (!proj.id || proj.id == "" || proj.id == "NEW") {
-            proj.id = proj.name.replace(/ /g, "_");
+            //proj.id = proj.name.replace(/ /g, "_");
+            proj.id = this.uniqueId();
         }
     }
 
@@ -187,14 +194,8 @@ class ProjectDB {
         });
         if (this.allowEdits) {
             //let bstr = sprintf('<input id="%s" type="button" value="edit">', bid);
-            $("#createProject").click(e => inst.createProject())
+            $("#createProject").click(e => inst.launchCreateProject())
         }
-    }
-
-    createProject() {
-        console.log("*** create New Project");
-        var url = "projectEdit.html?projectId=NEW";
-        window.open(url, "_self");
     }
 
     // called from GUI to update the project being editd.
@@ -202,7 +203,7 @@ class ProjectDB {
         var proj = this.currentProject;
         var editor = tinymce.get('editArea');
         var content = editor.getContent();
-        proj.id = $("#projectId").val();
+        //proj.id = $("#projectId").val();
         proj.name = $("#projectName").val();
         var imageURL = $("#imageURL").val();
         var infoURL = $("#infoURL").val();
@@ -223,14 +224,26 @@ class ProjectDB {
         this.launchProjectList();
     }
 
+    launchCreateProject() {
+        console.log("*** create New Project");
+        var url = "projectEdit.html?projectId=NEW";
+        if (username)
+            url = url + "&username="+username;
+        window.open(url, "_self");
+    }
+
     launchProjectList() {
         var url = "projectList.html?edit=True";
+        if (username)
+            url = url + "&username="+username;
         window.open(url, "_self");
     }
 
     // called to change to a new webpage for editing a project
     launchEditProject(projId) {
         var url = "projectEdit.html?projectId=" + projId;
+        if (username)
+            url = url + "&username="+username;
         window.open(url, "_self");
     }
 
@@ -264,7 +277,7 @@ class ProjectDB {
 
     getProjectDiv(project) {
         var inst = this;
-        project.id = project.name.replace(/ /g, "_");
+        //project.id = project.name.replace(/ /g, "_");
         let bid = 'edit' + project.id;
         let div = getDiv();
         let item = "<b>NAME</b><p>DESC";

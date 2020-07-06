@@ -32,43 +32,24 @@
             }
         }
 
-        .proj-img {
-            width: 100%;
-            height: 100px;
-        }
-
         .grid {
             width: 100%;
-            xxborder-style: solid;
+            border-style: solid;
             border-width: 2px;
-            padding: 4px;
+            padding: 2px;
         }
 
         .grid-item {
             width: 200px;
             border-style: solid;
             border-width: 2px;
-            padding: 4px;
         }
 
         .grid-item--width2 {
             width: 200px;
             border-style: solid;
             border-width: 2px;
-            padding: 4px;
-            margin: 4px;
         }
-
-        .editArea {
-            width: 100%;
-            height: 200px;
-            margin: 20px;
-        }
-
-        .inputArea {
-            width: 600px
-        }
-
     </style>
     <!-- Custom styles for this template -->
     <link href="album.css" rel="stylesheet">
@@ -76,24 +57,21 @@
 
 <body>
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
     <script>
-            //tinymce.init({ selector: 'textarea' });
     </script>
-
+    <!--
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+    -->
     <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.js"></script>
-    <script src="js/util.js"></script>
-    <script src="js/sprintf.js"></script>
     <script src="js/Project.js"></script>
     <header>
     </header>
 
     <main role="main">
-        <!--
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -116,8 +94,7 @@
                             The Garden
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="http://64.225.35.76/enock/garden.html">What is The
-                                Garden</a>
+                            <a class="dropdown-item" href="http://64.225.35.76/enock/garden.html">What is The Garden</a>
                             <a class="dropdown-item" href="http://64.225.35.76/FlowerGarden/flowers.html">Play
                                 Garden</a>
                         </div>
@@ -132,20 +109,31 @@
                 </form>
             </div>
         </nav>
-    -->
-    Project Name: <input id="projectName" class="inputArea"><br>
-    Info URL: <input id="infoURL" class="inputArea"><br>
-    Image URL: <input id="imageURL" class="inputArea"><br>
-    ProjectType: <input id="projectType" class="inputArea"><br>
-    <textarea id="editArea" class="editArea"></textarea>
-        <input id="updateProject" type="submit" value="Update Project">
-        <input id="cancelButton" type="button" value="Cancel">
-        <p></p>&nbsp;<p></p>
-        <input id="deleteButton" type="button" value="Delete">
 
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1>Projects of WorldViews & </br>The Garden</h1>
+                <p>One of the main objectives of both WorldViews and The Garden is to facilitate a collaboration of
+                    humans throughout the world. We will be making a space for people to work on various projects. This
+                    is just a sample of some of our completed projects.</p>
+            </div>
+        </section>
         <div id="projectListDiv" class="grid">
+            <div class="grid-item">This is proj 1 description. XXkkdk dkdkd kdkdkd dkdkdk dkdkd kdkddddk
+                ekekekke kekeke kekeke</div>
+            <div class="grid-item xxgrid-item--width2">Project 2 is really cool! XXkkdk dkdkd kdkdkd dkdkdk dkdkd
+                kdkddddk
+                ekekekke kekeke kekeke XXkkdk dkdkd kdkdkd dkdkdk dkdkd kdkddddk
+                ekekekke kekeke kekeke XXkkdk dkdkd kdkdkd dkdkdk dkdkd kdkddddk
+                ekekekke kekeke kekeke</div>
+            <div class="grid-item">Project 3 sucks ... XXkkdk dkdkd kdkdkd dkdkdk dkdkd kdkddddk
+                ekekekke kekeke kekeke XXkkdk dkdkd kdkdkd dkdkdk dkdkd kdkddddk
+                ekekekke kekeke kekeke XXkkdk dkdkd kdkdkd dkdkdk dkdkd kdkddddk
+                ekekekke kekeke kekeke</div>
+            ...
         </div>
     </main>
+
     <footer class="text-muted">
         <div class="container">
             <p class="float-right">
@@ -153,50 +141,11 @@
             </p>
         </div>
     </footer>
-    <script>
-        tinymce.init({
-            selector: 'textarea',
-            height: 500,
-            theme: 'modern',
-            plugins: [
-                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                'searchreplace wordcount visualblocks visualchars code fullscreen',
-                'insertdatetime media nonbreaking save table contextmenu directionality',
-                'emoticons template paste textcolor colorpicker textpattern imagetools'
-            ],
-            toolbar1: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-            toolbar2: 'print preview media | forecolor backcolor emoticons',
-            image_advtab: true,
-            templates: [
-                { title: 'Test template 1', content: 'Test 1' },
-                { title: 'Test template 2', content: 'Test 2' }
-            ],
-            content_css: [
-                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                '//www.tinymce.com/css/codepen.min.css'
-            ]
-        });
-
-        var pdb;
-        var username;
-        $(document).ready(async e => {
-            pdb = new ProjectDB();
-            pdb.allowEdits = true;
-            username = getParameterByName("username");
-            var projectId = getParameterByName("projectId");
-            await pdb.loadProjects();
-            /*
-            $('.grid').masonry({
-                itemSelector: '.grid-item',
-                columnWidth: 120
-            });
-            */
-            if (projectId) {
-                pdb.editProject(projectId);
-            }
-        });
-
-    </script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 
 </html>

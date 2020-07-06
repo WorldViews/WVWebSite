@@ -149,9 +149,12 @@
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
     <script>
+        var pdb;
+        var username;
         $(document).ready(async e => {
-            var pdb = new ProjectDB();
-            pdb.allowEdits = getBooleanParameterByName("edit");
+            pdb = new ProjectDB();
+            username = getParameterByName("username");
+            pdb.allowEdits = (username != null);
             var projectId = getParameterByName("projectId");
             await pdb.layoutProjects();
             $('.grid').masonry({
