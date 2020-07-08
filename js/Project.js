@@ -207,6 +207,8 @@ class ProjectDB {
         proj.name = $("#projectName").val();
         var imageURL = $("#imageURL").val();
         var infoURL = $("#infoURL").val();
+        var instagramUsername = $("#instagramName").val();
+        var instagramTag = $("#instagramTag").val();
         var projectType = $("#projectType").val();
         if (imageURL)
             proj.imageURL = imageURL;
@@ -214,6 +216,10 @@ class ProjectDB {
             proj.infoURL = infoURL;
         if (projectType)
             proj.projectType = projectType;
+        if (instagramTag)
+            proj.instagramTag = instagramTag;
+        if (instagramUsername)
+            proj.instagramUsername = instagramUsername;
         proj.description = content;
         if (proj.name == "" || !proj.name) {
             alert("Name required for projects");
@@ -264,6 +270,8 @@ class ProjectDB {
         $("#imageURL").val(proj.image);
         $("#infoURL").val(proj.infoURL);
         $("#projectType").val(proj.projectType);
+        $("#instagramName").val(proj.instagramUsername);
+        $("#instagramTag").val(proj.instagramTag);
         //$("#editArea").html(proj.description);
         if (proj == null) {
             alert("No project with id", projId);
