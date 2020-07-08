@@ -65,9 +65,47 @@ class ProjectDB {
         this.setupGUI();
     }
 
+    getFirebaseDB() {
+        if (this.firebaseDB)
+            return this.firebaseDB;
+        var firebaseConfig = {
+            apiKey: "AIzaSyBqAsqHaBZGT-UsC82ShV3koGWWgu-l8to",
+            authDomain: "fir-helloworld-39759.firebaseapp.com",
+            databaseURL: "https://fir-helloworld-39759.firebaseio.com",
+            projectId: "fir-helloworld-39759",
+            storageBucket: "fir-helloworld-39759.appspot.com",
+            messagingSenderId: "1080893233748",
+            appId: "1:1080893233748:web:1614aab0d167c094322bc1"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        this.firebaseDB = firebase.database();
+        console.log("db:", this.firebaseDB);
+        return this.firebaseDB;
+    }
+
+    loadProjectsFromFirebase() {
+        var db = this.getFirebaseDB();
+        console.log("db:", db);
+        //var dbRef = db.ref('/text');
+        var dbRef = db.ref();
+        console.log("Got dbRef", dbRef);
+        return new Promise((res, rej) => {
+            dbRef.on('value', snap => {
+                console.log("Got", snap);
+                var obj = snap.val();
+                console.log("obj", obj);
+                var jstr = JSON.stringify(obj, null, 3);
+                console.log("projects", jstr);
+                res(obj.topics);
+            });
+        })
+    }
+
     async loadProjects() {
         var inst = this;
-        var projectsObj = await loadJSON("projects.json");
+        //var projectsObj = await loadJSON("projects.json");
+        var projectsObj = await this.loadProjectsFromFirebase();
         this.projectsObj = projectsObj;
         projectsObj.projects.forEach(proj => {
             inst.checkId(proj);
@@ -76,13 +114,36 @@ class ProjectDB {
         return projectsObj;
     }
 
+    uniqueId() {
+        var id = 'proj_'+getClockTime();
+        id = id.replace(/\./g, "_");
+        return id;
+    }
+
     checkId(proj) {
-        if (!proj.id || proj.id=="" || proj.id == "NEW") {
-            proj.id = proj.name.replace(/ /g, "_");
+        if (!proj.id || proj.id == "" || proj.id == "NEW") {
+            //proj.id = proj.name.replace(/ /g, "_");
+            proj.id = this.uniqueId();
         }
     }
 
     async updateDB() {
+        //return this.updateProjectsFile();
+        return this.updateFirebaseDB();
+    }
+
+    async updateFirebaseDB() {
+        console.log("update firebase");
+        var db = this.getFirebaseDB();
+        console.log("db:", db);
+        //var dbRef = db.ref('/text');
+        var dbRef = db.ref();
+        console.log("Got dbRef", dbRef);
+        await dbRef.child("topics").set(this.projectsObj);
+        console.log("Successfully updated");
+    }
+
+    async updateProjectsFile() {
         var jstr = JSON.stringify(this.projectsObj, null, 3);
         console.log("ProjectsObj:\n", jstr);
         var fname = "projects.json";
@@ -107,13 +168,13 @@ class ProjectDB {
         if (!proj)
             proj = this.currentProject;
         var projs = this.projectsObj.projects;
-        var i=-1;
-        for (var j=0; j<projs.length; j++) {
+        var i = -1;
+        for (var j = 0; j < projs.length; j++) {
             if (projs[j].id == proj.id)
                 i = j;
         }
-       if (i >= 0) {
-          projs.splice( i, 1 );
+        if (i >= 0) {
+            projs.splice(i, 1);
         }
         else {
             alert("cannot find project to delete");
@@ -133,14 +194,8 @@ class ProjectDB {
         });
         if (this.allowEdits) {
             //let bstr = sprintf('<input id="%s" type="button" value="edit">', bid);
-            $("#createProject").click(e => inst.createProject())
+            $("#createProject").click(e => inst.launchCreateProject())
         }
-    }
-
-    createProject() {
-        console.log("*** create New Project");
-        var url = "projectEdit.html?projectId=NEW";
-        window.open(url, "_self");
     }
 
     // called from GUI to update the project being editd.
@@ -148,10 +203,12 @@ class ProjectDB {
         var proj = this.currentProject;
         var editor = tinymce.get('editArea');
         var content = editor.getContent();
-        proj.id = $("#projectId").val();
+        //proj.id = $("#projectId").val();
         proj.name = $("#projectName").val();
         var imageURL = $("#imageURL").val();
         var infoURL = $("#infoURL").val();
+        var instagramUsername = $("#instagramName").val();
+        var instagramTag = $("#instagramTag").val();
         var projectType = $("#projectType").val();
         if (imageURL)
             proj.imageURL = imageURL;
@@ -159,6 +216,10 @@ class ProjectDB {
             proj.infoURL = infoURL;
         if (projectType)
             proj.projectType = projectType;
+        if (instagramTag)
+            proj.instagramTag = instagramTag;
+        if (instagramUsername)
+            proj.instagramUsername = instagramUsername;
         proj.description = content;
         if (proj.name == "" || !proj.name) {
             alert("Name required for projects");
@@ -169,14 +230,26 @@ class ProjectDB {
         this.launchProjectList();
     }
 
+    launchCreateProject() {
+        console.log("*** create New Project");
+        var url = "projectEdit.html?projectId=NEW";
+        if (username)
+            url = url + "&username="+username;
+        window.open(url, "_self");
+    }
+
     launchProjectList() {
         var url = "projectList.html?edit=True";
+        if (username)
+            url = url + "&username="+username;
         window.open(url, "_self");
     }
 
     // called to change to a new webpage for editing a project
     launchEditProject(projId) {
         var url = "projectEdit.html?projectId=" + projId;
+        if (username)
+            url = url + "&username="+username;
         window.open(url, "_self");
     }
 
@@ -187,7 +260,7 @@ class ProjectDB {
         if (projId == "NEW") {
             console.log("*** create new project");
             this.isNewProj = true;
-            proj = {name:'', id: "", description: ""};
+            proj = { name: '', id: "", description: "" };
             this.projectsObj.projects.push(proj);
         }
         this.currentProject = proj;
@@ -197,6 +270,8 @@ class ProjectDB {
         $("#imageURL").val(proj.image);
         $("#infoURL").val(proj.infoURL);
         $("#projectType").val(proj.projectType);
+        $("#instagramName").val(proj.instagramUsername);
+        $("#instagramTag").val(proj.instagramTag);
         //$("#editArea").html(proj.description);
         if (proj == null) {
             alert("No project with id", projId);
@@ -210,7 +285,7 @@ class ProjectDB {
 
     getProjectDiv(project) {
         var inst = this;
-        project.id = project.name.replace(/ /g, "_");
+        //project.id = project.name.replace(/ /g, "_");
         let bid = 'edit' + project.id;
         let div = getDiv();
         let item = "<b>NAME</b><p>DESC";
