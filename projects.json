@@ -159,6 +159,16 @@
          "infoURL": "https://gobeyondthefence.com",
          "projectType": "project",
          "imageURL": "https://www.nps.gov/grca/planyourvisit/images/powell-pt-640.jpg?maxwidth=650&autorotate=false"
+      },
+      {
+         "name": "Climate stuff",
+         "id": "NEW ",
+         "description": "<p>This is my climate project.</p>\n<p><img class=\"n3VNCb\" style=\"float: left;\" src=\"https://cdn.britannica.com/s:800x450,c:crop/23/204523-138-A67F2633/more-weather-climate.jpg\" alt=\"Climate | meteorology | Britannica\" width=\"530\" height=\"298\" data-noaft=\"1\" /></p>"
+      },
+      {
+         "name": "my project",
+         "id": "my_project",
+         "description": "<p>hello world</p>"
       }
    ]
 }
