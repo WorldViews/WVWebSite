@@ -63,11 +63,82 @@ class ProjectDB {
         this.allowEdits = false;
         var inst = this;
         this.setupGUI();
+        this.initFirebase();
     }
+
+    async initFirebase() {
+        var inst = this;
+        if (inst.firebase)
+            return;
+        var firebaseConfig = {
+            apiKey: "AIzaSyBqAsqHaBZGT-UsC82ShV3koGWWgu-l8to",
+            authDomain: "fir-helloworld-39759.firebaseapp.com",
+            databaseURL: "https://fir-helloworld-39759.firebaseio.com",
+            projectId: "fir-helloworld-39759",
+            storageBucket: "fir-helloworld-39759.appspot.com",
+            messagingSenderId: "1080893233748",
+            appId: "1:1080893233748:web:1614aab0d167c094322bc1"
+        };
+        // Initialize Firebase
+        //TODO: move firebase initialization to early place before we
+        // go to fetch data.
+        firebase.initializeApp(firebaseConfig);
+        inst.firebase = firebase;
+
+        firebase.auth().onAuthStateChanged(user => {
+            console.log("authStateChange", user);
+            inst.user = user;
+            if (user) {
+                // User is signed in.
+                var displayName = user.displayName;
+                var email = user.email;
+                var emailVerified = user.emailVerified;
+                var photoURL = user.photoURL;
+                var isAnonymous = user.isAnonymous;
+                var uid = user.uid;
+                var providerData = user.providerData;
+                if (!displayName || displayName == "")
+                    displayName = email;
+                $("#userInfo").html(displayName);
+                $("#login").html("signout");
+                inst.allowEdits = true;
+                inst.heartBeater = setInterval(() => inst.produceHeartBeat(), 5000);
+                // ...
+            } else {
+                // User is signed out.
+                // ...
+                $("#userInfo").html("guest");
+                $("#login").html("login");
+                inst.allowEdits = false;
+                if (inst.heartBeater) {
+                    clearInterval(inst.heartBeater);
+                    inst.heartBeater = null;
+                }
+            }
+        });
+        $("#login").click(e => inst.handleLogin());
+    }
+
+    handleLogin() {
+        // window.open('./PlayAuth/auth.html');
+        if (this.user) {
+            this.firebase.auth().signOut().then(function () {
+                // Sign-out successful.
+            }).catch(function (error) {
+                // An error happened.
+            });
+        }
+        else {
+            window.location = './auth.html';
+        }
+    }
+
 
     getFirebaseDB() {
         if (this.firebaseDB)
             return this.firebaseDB;
+        this.initFirebase();
+        /*
         var firebaseConfig = {
             apiKey: "AIzaSyBqAsqHaBZGT-UsC82ShV3koGWWgu-l8to",
             authDomain: "fir-helloworld-39759.firebaseapp.com",
@@ -79,7 +150,8 @@ class ProjectDB {
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        this.firebaseDB = firebase.database();
+        */
+        this.firebaseDB = this.firebase.database();
         console.log("db:", this.firebaseDB);
         return this.firebaseDB;
     }
@@ -115,7 +187,7 @@ class ProjectDB {
     }
 
     uniqueId() {
-        var id = 'proj_'+getClockTime();
+        var id = 'proj_' + getClockTime();
         id = id.replace(/\./g, "_");
         return id;
     }
@@ -234,14 +306,14 @@ class ProjectDB {
         console.log("*** create New Project");
         var url = "projectEdit.html?projectId=NEW";
         if (username)
-            url = url + "&username="+username;
+            url = url + "&username=" + username;
         window.open(url, "_self");
     }
 
     launchProjectList() {
         var url = "projectList.html?edit=True";
         if (username)
-            url = url + "&username="+username;
+            url = url + "&username=" + username;
         window.open(url, "_self");
     }
 
@@ -249,7 +321,7 @@ class ProjectDB {
     launchEditProject(projId) {
         var url = "projectEdit.html?projectId=" + projId;
         if (username)
-            url = url + "&username="+username;
+            url = url + "&username=" + username;
         window.open(url, "_self");
     }
 
