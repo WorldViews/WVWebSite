@@ -102,7 +102,7 @@ class ProjectDB {
                 $("#userInfo").html(displayName);
                 $("#login").html("signout");
                 inst.allowEdits = true;
-                inst.heartBeater = setInterval(() => inst.produceHeartBeat(), 5000);
+                //inst.heartBeater = setInterval(() => inst.produceHeartBeat(), 5000);
                 // ...
             } else {
                 // User is signed out.
