@@ -154,10 +154,10 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
-		<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-		<script>
-		
-    var pdb;
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script>
+
+        var pdb;
         var username;
         $(document).ready(async e => {
             pdb = new ProjectDB();
@@ -165,18 +165,22 @@
             pdb.allowEdits = (username != null);
             var projectId = getParameterByName("projectId");
             await pdb.layoutProjects();
+            /*
             $('.grid').masonry({
                 itemSelector: '.grid-item',
                 columnWidth: 210
             });
+            */
+            var $grid = $('.grid').imagesLoaded(function () {
+                // init Masonry after all images have loaded
+                console.log("***** images Loaded ****");
+                $('.grid').masonry({
+                    itemSelector: '.grid-item',
+                    columnWidth: 210
+                });
+            });
         });
-		var $grid = $('.grid').imagesLoaded( function() {
-  // init Masonry after all images have loaded
-  $grid.masonry({
-    // options...
-  });
-});
-		
+
     </script>
 
 </html>
