@@ -159,8 +159,7 @@ class ProjectDB {
     loadProjectsFromFirebase() {
         var db = this.getFirebaseDB();
         console.log("db:", db);
-        //var dbRef = db.ref('/text');
-        var dbRef = db.ref();
+        var dbRef = db.ref('/topics');
         console.log("Got dbRef", dbRef);
         return new Promise((res, rej) => {
             dbRef.on('value', snap => {
@@ -169,7 +168,7 @@ class ProjectDB {
                 console.log("obj", obj);
                 var jstr = JSON.stringify(obj, null, 3);
                 console.log("projects", jstr);
-                res(obj.topics);
+                res(obj);
             });
         })
     }
