@@ -369,7 +369,7 @@ class ProjectDB {
         //project.id = project.name.replace(/ /g, "_");
         let bid = 'edit' + project.id;
         let div = getDiv();
-        let item = "<b>NAME</b><p>DESC";
+        let item = "<h3 class='proj-heading'>NAME</h3><p>DESC";
         item = item.replace("NAME", project.name)
         item = item.replace("DESC", project.description);
         if (project.image) {

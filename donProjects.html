@@ -35,6 +35,7 @@
         .proj-img {
             width: 100%;
             height: 200px;
+            border-radius: 20px;
         }
 
         .grid {
@@ -45,10 +46,14 @@
         }
 
         .grid-item {
-            width: 400px;
+            xwidth: 500px;
+            width: 95%;
             border-style: solid;
             border-width: 2px;
-            padding: 4px;
+            border-radius: 10px;
+            padding: 20px;
+            margin-left: 20px;
+            background-color: aliceblue;
         }
 
         .grid-item--width2 {
@@ -59,9 +64,14 @@
             margin: 4px;
         }
 
+        .jumbotron {
+            xbackground-color: aliceblue;
+        }
         .projpic {
             float: right;
-            margin: 10px;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            border-radius: 6px;
         }
     </style>
     <!-- Custom styles for this template -->
@@ -88,12 +98,8 @@
     <main role="main">
         <section class="jumbotron text-center">
             <div class="container">
-                <h1>WorldViews & Garden Projects</h1>
-                <p>One of the main objectives of both WorldViews and The Garden is to facilitate a collaboration
-                    of
-                    humans throughout the world. We will be making a space for people to work on various
-                    projects. This
-                    is just a sample of some of our projects, partner projects or inspirations.</p>
+                <h1>Don Kimber's Projects</h1>
+                <p>This is a list of some of my projects, themes and activities from over the years.</p>
             </div>
         </section>
         <div id="projectListDiv" class="grid">
@@ -118,9 +124,10 @@
             var projectId = getParameterByName("projectId");
             await pdb.layoutProjects();
 
+            var columnWidth = 600;
             $('.grid').masonry({
                 itemSelector: '.grid-item',
-                columnWidth: 210
+                columnWidth
             });
 
             var $grid = $('.grid').imagesLoaded(function () {
@@ -128,7 +135,7 @@
                 console.log("***** images Loaded ****");
                 $('.grid').masonry({
                     itemSelector: '.grid-item',
-                    columnWidth: 210
+                    columnWidth
                 });
             });
         });

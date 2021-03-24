@@ -44,20 +44,24 @@
             padding: 4px;
         }
 
-        .grid-item {
+        .grid-itemXXX {
             width: 400px;
             border-style: solid;
             border-width: 2px;
             padding: 4px;
         }
 
-        .grid-item--width2 {
+        .grid-item {
             width: 400px;
+            xwidth: 95%;
             border-style: solid;
             border-width: 2px;
-            padding: 4px;
-            margin: 4px;
+            border-radius: 10px;
+            padding: 20px;
+            margin-left: 10px;
+            background-color: aliceblue;
         }
+
     </style>
     <!-- Custom styles for this template -->
     <link href="album.css" rel="stylesheet">
@@ -166,9 +170,10 @@
             var projectId = getParameterByName("projectId");
             await pdb.layoutProjects();
 
+            var columnWidth = 460;
             $('.grid').masonry({
                 itemSelector: '.grid-item',
-                columnWidth: 210
+                columnWidth
             });
 
             var $grid = $('.grid').imagesLoaded(function () {
@@ -176,7 +181,7 @@
                 console.log("***** images Loaded ****");
                 $('.grid').masonry({
                     itemSelector: '.grid-item',
-                    columnWidth: 210
+                    columnWidth
                 });
             });
         });
