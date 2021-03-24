@@ -57,7 +57,8 @@ function getDiv() {
 
 
 class ProjectDB {
-    constructor() {
+    constructor(opts) {
+        this.opts = opts || {};
         this.projectsObj;
         this.projectsById = {};
         this.allowEdits = false;
@@ -173,8 +174,17 @@ class ProjectDB {
         })
     }
 
+    async loadProjectsFromURL(url) {
+        var projectsObj = await loadJSON(url);
+        return projectsObj;
+    }
+
     async loadProjects() {
         var inst = this;
+        var projectsURL = getParameterByName("projectsURL") || this.opts.projectsURL;
+        if (projectsURL) {
+            return await this.loadProjectsFromURL(projectsURL);
+        }
         //var projectsObj = await loadJSON("projects.json");
         var projectsObj = await this.loadProjectsFromFirebase();
         this.projectsObj = projectsObj;
@@ -380,6 +390,12 @@ class ProjectDB {
             });
         }
         return div;
+    }
+
+    async download(fname) {
+        fname = fname || "projs.json";
+        var projs = await this.loadProjects();
+        downloadFromBrowser(fname, projs);
     }
 }
 

@@ -165,15 +165,15 @@ async function asyncUploadDataToFile(dpath, data, fileName) {
     });
 }
 
-function downloadFromBrowser(filename, text) {
+function downloadFromBrowser(filename, data) {
+    var text = data;
+    if (typeof text != "string")
+        text = JSON.stringify(data, null, 3);
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
     element.setAttribute('download', filename);
-
     element.style.display = 'none';
     document.body.appendChild(element);
-
     element.click();
-
     document.body.removeChild(element);
 }
