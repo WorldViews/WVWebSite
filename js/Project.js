@@ -167,8 +167,8 @@ class ProjectDB {
                 console.log("Got", snap);
                 var obj = snap.val();
                 console.log("obj", obj);
-                var jstr = JSON.stringify(obj, null, 3);
-                console.log("projects", jstr);
+                //var jstr = JSON.stringify(obj, null, 3);
+                //console.log("projects", jstr);
                 res(obj);
             });
         })
@@ -363,7 +363,6 @@ class ProjectDB {
         editor.setContent(proj.description);
     }
 
-
     getProjectDiv(project) {
         var inst = this;
         //project.id = project.name.replace(/ /g, "_");
@@ -379,7 +378,7 @@ class ProjectDB {
         item += '<br>';
         if (this.allowEdits) {
             let bstr = sprintf('<input id="%s" type="button" value="edit">', bid);
-            console.log("button:", bid, bstr);
+            //console.log("button:", bid, bstr);
             item += bstr;
         }
         div.html(item);
