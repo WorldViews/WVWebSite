@@ -5,9 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
-    <title>Projects</title>
-    <!-- Bootstrap core CSS -->
-    <link href="css/xbootstrap.css" rel="stylesheet">
+    <title>WorldViews Projects</title>
 
     <style>
         .intro {
@@ -95,7 +93,7 @@
             style="float:left; width: 150px; margin:20px;">
 
         <section class="intro">
-            <h1 style="font-size: xx-large;">Welcome to WorldViews</h1>
+            <h1 style="font-size: xx-large;">WorldViews Projects and Collaborations</h1>
             <p>One of the main objectives of both WorldViews and The Garden is to facilitate a collaboration
                 of
                 humans throughout the world. We will be making a space for people to work on various
@@ -111,12 +109,16 @@
 
         var pdb;
         var username;
+        var tags;
+
         $(document).ready(async e => {
             pdb = new ProjectDB();
             username = getParameterByName("username");
+            tags = getParameterByName("tags");
+            console.log("tags:", tags);
             pdb.allowEdits = (username != null);
             var projectId = getParameterByName("projectId");
-            await pdb.layoutProjects();
+            await pdb.layoutProjects(tags);
 
             var columnWidth = 500;
             $('.grid').masonry({

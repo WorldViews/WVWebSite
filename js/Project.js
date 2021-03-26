@@ -59,7 +59,7 @@ function getDiv() {
 class ProjectDB {
     constructor(opts) {
         this.opts = opts || {};
-        this.projectsObj;
+        this.projectsObj = null;
         this.projectsById = {};
         this.allowEdits = false;
         var inst = this;
@@ -176,6 +176,7 @@ class ProjectDB {
 
     async loadProjectsFromURL(url) {
         var projectsObj = await loadJSON(url);
+        this.projectsObj = projectsObj;
         return projectsObj;
     }
 
@@ -191,8 +192,48 @@ class ProjectDB {
         projectsObj.projects.forEach(proj => {
             inst.checkId(proj);
             this.projectsById[proj.id] = proj;
+            proj.tags = inst.getTags(proj.projectType);
         });
         return projectsObj;
+    }
+
+    async getProjects(tags) {
+        var projectsObj = this.projectsObj;
+        if (!projectsObj)
+            projectsObj = await this.loadProjects();
+        var projs = [];
+        if (typeof tags == "string")
+            tags = this.getTags(tags);
+        for (var proj of projectsObj.projects) {
+            if (tags) {
+                if (this.contains(proj.tags, tags)) {
+                    projs.push(proj);
+                }
+            }
+            else {
+                projs.push(proj);
+            }
+        }
+        return projs;
+    }
+
+    getTags(str) {
+        if (!str)
+            return [];
+        str = str.trim().toLowerCase();
+        return str.split(/[ ,]+/);
+    }
+
+    // return true if tagList contains all given tags.  Tags
+    contains(tagList, tags)
+    {
+        if (typeof tags == "string")
+            return (tagList.indexOf(tagOrTags.toLowerCase() >= 0));
+        for (var tag of tags) {
+            if (tagList.indexOf(tag.toLowerCase()) < 0)
+                return false;
+        }
+        return true;
     }
 
     uniqueId() {
@@ -265,11 +306,11 @@ class ProjectDB {
     }
 
 
-    async layoutProjects() {
+    async layoutProjects(filterTags) {
+        console.log("layoutProjects", filterTags);
         //projects = PROJECTS.projects;
         var inst = this;
-        var projectsObj = await this.loadProjects();
-        var projects = projectsObj.projects;
+        var projects = await this.getProjects(filterTags);
         projects.forEach(project => {
             var div = this.getProjectDiv(project);
         });
