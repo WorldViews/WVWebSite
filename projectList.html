@@ -10,9 +10,8 @@
     <link href="css/xbootstrap.css" rel="stylesheet">
 
     <style>
- 
         .intro {
-            background-color: lightgray;
+            background-color: rgb(208, 232, 253);
             text-align: center;
             padding-top: 30px;
             padding-right: 15%;
@@ -42,6 +41,8 @@
             xxborder-style: solid;
             xxborder-width: 2px;
             padding: 4px;
+            margin: 0 auto;
+            /* necessary for masonry to center cols */
         }
 
         #XXXprojectListDiv {
@@ -61,6 +62,14 @@
             background-color: white;
         }
 
+        /* this applies to images inside grid-items */
+        .grid-item img {
+            xxborder-style: solid;
+            xxborder-width: 3px;
+            border-radius: 5px;
+            margin-left: 15px;
+            margin-bottom: 15px;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.js"></script>
@@ -77,20 +86,21 @@
     <header>
     </header>
     <main role="main">
-            <span style="float:right; padding:5px">
+        <span style="float:right; padding:5px">
             <span id="userInfo">guest</span>
             &nbsp;&nbsp;
             <button id="login">login</button>
         </span>
+            <img src="images/holding-hands-heart-shaped-earth-t.png"
+            style="float:left; width: 150px; margin:20px;">
 
         <section class="intro">
-
-                <h1>Welcome to WorldViews</h1>
-                <p>One of the main objectives of both WorldViews and The Garden is to facilitate a collaboration
-                    of
-                    humans throughout the world. We will be making a space for people to work on various
-                    projects. This
-                    is just a sample of some of our projects, partner projects or inspirations.</p>
+            <h1 style="font-size: xx-large;">Welcome to WorldViews</h1>
+            <p>One of the main objectives of both WorldViews and The Garden is to facilitate a collaboration
+                of
+                humans throughout the world. We will be making a space for people to work on various
+                projects. This
+                is just a sample of some of our projects, partner projects or inspirations.</p>
 
         </section>
     </main>
@@ -111,6 +121,7 @@
             var columnWidth = 500;
             $('.grid').masonry({
                 itemSelector: '.grid-item',
+                fitWidth: true,
                 columnWidth
             });
 
@@ -119,6 +130,7 @@
                 console.log("***** images Loaded ****");
                 $('.grid').masonry({
                     itemSelector: '.grid-item',
+                    fitWidth: true,
                     columnWidth
                 });
             });

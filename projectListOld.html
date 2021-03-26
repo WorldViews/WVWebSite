@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.0.1">
+    <title>Projects</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/album/">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/dist/css/bootstrap.css" rel="stylesheet">
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .proj-img {
+            width: 100%;
+            height: 200px;
+        }
+
+        .grid {
+            width: 100%;
+            xxborder-style: solid;
+            border-width: 2px;
+            padding: 4px;
+        }
+
+        .grid-itemXXX {
+            width: 400px;
+            border-style: solid;
+            border-width: 2px;
+            padding: 4px;
+        }
+
+        .grid-item {
+            width: 400px;
+            xwidth: 95%;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 10px;
+            padding: 20px;
+            margin-left: 10px;
+            background-color: aliceblue;
+        }
+
+    </style>
+    <!-- Custom styles for this template -->
+    <link href="album.css" rel="stylesheet">
+</head>
+
+<body>
+    </style>
+    <!--
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
+    -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/sprintf.js"></script>
+    <script src="js/Project.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+    <header>
+    </header>
+
+    <main role="main">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="https://worldviews.org/enock/">WorldViews <span
+                                class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://worldviews.org/static/TeleViewer.html">TeleViewer</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            The Garden
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="http://64.225.35.76/enock/garden.html">What is The
+                                Garden</a>
+                            <a class="dropdown-item" href="http://64.225.35.76/FlowerGarden/flowers.html">Play
+                                Garden</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://worldviews.org/enock/projects.html" tabindex="-1">Projects</a>
+                    </li>
+                </ul>
+                <!--
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                -->
+                &nbsp;&nbsp;
+                <span id="userInfo">guest</span>
+                &nbsp;&nbsp;
+                <button id="login">login</button>
+            </div>
+        </nav>
+
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1>WorldViews & Garden Projects</h1>
+                <p>One of the main objectives of both WorldViews and The Garden is to facilitate a collaboration
+                    of
+                    humans throughout the world. We will be making a space for people to work on various
+                    projects. This
+                    is just a sample of some of our projects, partner projects or inspirations.</p>
+            </div>
+        </section>
+        <div id="projectListDiv" class="grid">
+        </div>
+        <input id="createProject" type="button" value="Add Project">
+    </main>
+
+    <footer class="text-muted">
+        <div class="container">
+            <p class="float-right">
+                <a href="#">Back to top</a>
+            </p>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script>
+
+        var pdb;
+        var username;
+        $(document).ready(async e => {
+            pdb = new ProjectDB();
+            username = getParameterByName("username");
+            pdb.allowEdits = (username != null);
+            var projectId = getParameterByName("projectId");
+            await pdb.layoutProjects();
+
+            var columnWidth = 460;
+            $('.grid').masonry({
+                itemSelector: '.grid-item',
+                columnWidth
+            });
+
+            var $grid = $('.grid').imagesLoaded(function () {
+                // init Masonry after all images have loaded
+                console.log("***** images Loaded ****");
+                $('.grid').masonry({
+                    itemSelector: '.grid-item',
+                    columnWidth
+                });
+            });
+        });
+
+    </script>
+
+</html>
