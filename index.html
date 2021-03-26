@@ -9,7 +9,8 @@
 
     <style>
         .intro {
-            background-color: rgb(208, 232, 253);
+            xxxbackground-color: rgb(208, 232, 253);
+            background-image: linear-gradient(rgb(145, 200, 248), aliceblue);
             text-align: center;
             padding-top: 30px;
             padding-right: 15%;
@@ -105,6 +106,15 @@
     <div id="projectListDiv" class="grid">
     </div>
     <input id="createProject" type="button" value="Add Project">
+    <p>
+    </p>
+    <center>
+    <h1 style="text-align: center;">Partner Organizations</h1>        
+    </center>
+    <p></p>
+    <div id="partners" class="grid">
+    </div>
+
     <script>
 
         var pdb;
@@ -118,23 +128,42 @@
             pdb.allowEdits = (username != null);
             var projectId = getParameterByName("projectId");
             await pdb.layoutProjects(tags);
+            await pdb.layoutProjects("organization", "#partners");
 
             var columnWidth = 500;
-            $('.grid').masonry({
+            //$('.grid').masonry({
+            $('#projectListDiv').masonry({
                 itemSelector: '.grid-item',
                 fitWidth: true,
                 columnWidth
             });
-
             var $grid = $('.grid').imagesLoaded(function () {
                 // init Masonry after all images have loaded
                 console.log("***** images Loaded ****");
-                $('.grid').masonry({
+                //$('.grid').masonry({
+                $('#projectListDiv').masonry({
                     itemSelector: '.grid-item',
                     fitWidth: true,
                     columnWidth
                 });
             });
+
+            $('#partners').masonry({
+                itemSelector: '.grid-item',
+                fitWidth: true,
+                columnWidth
+            });
+            var $grid = $('.grid').imagesLoaded(function () {
+                // init Masonry after all images have loaded
+                console.log("***** images Loaded ****");
+                //$('.grid').masonry({
+                $('#partners').masonry({
+                    itemSelector: '.grid-item',
+                    fitWidth: true,
+                    columnWidth
+                });
+            });
+
         });
 
     </script>

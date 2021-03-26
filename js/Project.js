@@ -46,10 +46,11 @@ var PROJECTS = {
 };
 
 var numProjs = 0;
-function getDiv() {
+function getDiv(container) {
+    container = container || "#projectListDiv";
     var id = "proj_" + numProjs++;
     var div = $('<div class="grid-item"/>', { id: id, width: 200, border: 2 });
-    div.appendTo("#projectListDiv");
+    div.appendTo(container);
     div.html("empty div");
     return div;
 }
@@ -306,13 +307,13 @@ class ProjectDB {
     }
 
 
-    async layoutProjects(filterTags) {
+    async layoutProjects(filterTags, container) {
         console.log("layoutProjects", filterTags);
         //projects = PROJECTS.projects;
         var inst = this;
         var projects = await this.getProjects(filterTags);
         projects.forEach(project => {
-            var div = this.getProjectDiv(project);
+            var div = this.getProjectDiv(project, container);
         });
         if (this.allowEdits) {
             //let bstr = sprintf('<input id="%s" type="button" value="edit">', bid);
@@ -404,11 +405,11 @@ class ProjectDB {
         editor.setContent(proj.description);
     }
 
-    getProjectDiv(project) {
+    getProjectDiv(project, container) {
         var inst = this;
         //project.id = project.name.replace(/ /g, "_");
         let bid = 'edit' + project.id;
-        let div = getDiv();
+        let div = getDiv(container);
         let item = "<h3 class='proj-heading'>NAME</h3><p>DESC";
         item = item.replace("NAME", project.name)
         item = item.replace("DESC", project.description);
