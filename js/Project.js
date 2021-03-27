@@ -344,6 +344,7 @@ class ProjectDB {
         if (instagramUsername)
             proj.instagramUsername = instagramUsername;
         proj.description = content;
+        proj.mtime = getClockTime();
         if (proj.name == "" || !proj.name) {
             alert("Name required for projects");
             return;
@@ -390,7 +391,7 @@ class ProjectDB {
         console.log("editProj", proj);
         $("#projectId").val(projId);
         $("#projectName").val(proj.name);
-        $("#imageURL").val(proj.image);
+        $("#imageURL").val(proj.imageURL);
         $("#infoURL").val(proj.infoURL);
         $("#projectType").val(proj.projectType);
         $("#instagramName").val(proj.instagramUsername);
@@ -413,10 +414,10 @@ class ProjectDB {
         let item = "<h3 class='proj-heading'>NAME</h3><p>DESC";
         item = item.replace("NAME", project.name)
         item = item.replace("DESC", project.description);
-        if (project.image) {
-            item = sprintf("<img src='%s' class='proj-img'><br>", project.image) + item;
-        }
-        // $('.grid').masonry().append(item);
+        // we used to add the image sepapately, but now it is included in description
+        //if (project.imageURL) {
+        //    item = sprintf("<img src='%s' width='100' height='80' class='proj-img'><br>", project.imageURL) + item;
+        //}
         item += '<br>';
         if (this.allowEdits) {
             let bstr = sprintf('<input id="%s" type="button" value="edit">', bid);
