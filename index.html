@@ -90,29 +90,38 @@
             &nbsp;&nbsp;
             <button id="login">login</button>
         </span>
-            <img src="images/holding-hands-heart-shaped-earth-t.png"
-            style="float:left; width: 150px; margin:20px;">
+        <img src="images/holding-hands-heart-shaped-earth-t.png" style="float:left; width: 150px; margin:20px;">
 
         <section class="intro">
             <h1 style="font-size: xx-large;">Welcome to WorldViews</h1>
-            <p>One of the main objectives of both WorldViews and The Garden is to facilitate a collaboration
-                of
-                humans throughout the world. We will be making a space for people to work on various
-                projects. This
-                is just a sample of some of our projects, partner projects or inspirations.</p>
+            <p>
+                WorldViews was started in 2015 with the vision of connecting people by helping
+                them share views, stories and adventures from around the world.  Many WorldViews
+                projects and activities have involved 360 video, virtual earths, or remote telepresence
+                but our core mission is not fundamentally technological - it is to foster
+                mutual understanding and an appreciation that all of humanity is one family
+                sharing one Earth.  Our core values are diversity, inclusivity, cooperation and the
+                spreading of love and inspiration.              
+            </p>
 
         </section>
     </main>
-    <div id="projectListDiv" class="grid">
-    </div>
-    <input id="createProject" type="button" value="Add Project">
-    <p>
-    </p>
-    <center>
-    <h1 style="text-align: center;">Partner Organizations</h1>        
-    </center>
-    <p></p>
-    <div id="partners" class="grid">
+    <section>
+        <center>
+            <h1>Projects & Activities</h1>
+        </center>
+        <p></p>
+        <div id="projectListDiv" class="grid">
+        </div>
+        <!--  <input id="createProject" type="button" value="Add Project"> -->
+    </section>
+    <section>
+        <center>
+            <h1>Partner Organizations</h1>
+        </center>
+        <p></p>
+        <div id="partners" class="grid">
+    </section>
     </div>
 
     <script>
@@ -127,8 +136,8 @@
             tags = "core";
             pdb.allowEdits = (username != null);
             var projectId = getParameterByName("projectId");
-            await pdb.layoutProjects(tags);
-            await pdb.layoutProjects("organization", "#partners");
+            await pdb.layoutProjects({ tags });
+            await pdb.layoutProjects({ tags: "organization", container: "#partners" });
 
             var columnWidth = 500;
             //$('.grid').masonry({

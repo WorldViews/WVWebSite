@@ -198,11 +198,39 @@ class ProjectDB {
         return projectsObj;
     }
 
-    async getProjects(tags) {
+    async getProjectByName(name) {
+        if (!this.projectsObj)
+            await this.loadProjects();
+        for (var proj of this.projectsObj.projects) {
+            if (proj.name == name)
+                return proj;
+        }
+        return null;
+    }
+
+    // opts may either contain "tags" which is a tag specifier for finding
+    // a subset of the projects, or "names" which selects projects with given names
+    // Note that names can be used to set the order of projects, the returned
+    // list will be ordered same as names.
+    async getProjects(opts) {
+        var tags = opts.tags;
+        var names = opts.names;
         var projectsObj = this.projectsObj;
         if (!projectsObj)
             projectsObj = await this.loadProjects();
         var projs = [];
+        if (names) {
+            for (var name of names) {
+                var proj = await this.getProjectByName(name);
+                if (proj) {
+                    projs.push(proj)
+                }
+                else {
+                    alert("Project not found "+ name)
+                }
+            }
+            return projs;
+        }
         if (typeof tags == "string")
             tags = this.getTags(tags);
         for (var proj of projectsObj.projects) {
@@ -307,13 +335,14 @@ class ProjectDB {
     }
 
 
-    async layoutProjects(filterTags, container) {
-        console.log("layoutProjects", filterTags);
+    async layoutProjects(opts) {
+        opts = opts || {};
+        console.log("layoutProjects", opts);
         //projects = PROJECTS.projects;
         var inst = this;
-        var projects = await this.getProjects(filterTags);
+        var projects = await this.getProjects(opts);
         projects.forEach(project => {
-            var div = this.getProjectDiv(project, container);
+            var div = this.getProjectDiv(project, opts.container);
         });
         if (this.allowEdits) {
             //let bstr = sprintf('<input id="%s" type="button" value="edit">', bid);
