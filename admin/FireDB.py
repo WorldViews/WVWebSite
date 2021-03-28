@@ -5,7 +5,7 @@ To use this, get python 3.6+ and do
 pip install firebase-admin
 
 """
-import json, os
+import json, os, time
 import firebase_admin
 from firebase_admin import auth
 from firebase_admin import credentials
@@ -28,6 +28,11 @@ def verifyDir(dir):
     if not os.path.exists(dir):
         print("Creating dir", dir)
         os.mkdir(dir)
+
+def timeStr(t=None):
+    if t == None:
+        t = time.localtime()
+    return time.strftime("%Y_%m_%d_%H_%M_%S", t)
 
 class FireDB():
     def __init__(self):     
@@ -83,11 +88,11 @@ class FireDB():
         ref = self.db.reference(dbPath)
         data = ref.get()
         print("Got data")
-        print("Saving to", jsonPath);
+        print("Saving to", jsonPath)
         json.dump(data, open(jsonPath, "w"), indent=3)
 
-    def projects(self):
-        projsRef = self.db.reference("/topics/projects")
+    def projects(self, projRoot="/topics/projects"):
+        projsRef = self.db.reference(projRoot)
         projs = projsRef.get()
         return projs
 
@@ -97,12 +102,28 @@ class FireDB():
             print(proj)
             print()
 
+    def save(self, obj, root="/private/don/foo"):
+        ref = self.db.reference(root)
+        ref.set(obj)
+
+def transferProjs(dstRoot="/branches/don/topics/projects"):
+    fdb = FireDB()
+    projs = fdb.projects()
+    fdb.save(projs, dstRoot)
+
+def backup():
+    fdb = FireDB()
+    fdb.backupUsers()
+    ts = timeStr()
+    fdb.backupDB(jsonPath="backups/topics_%s.json" % (ts,))
+    fdb.backupDB("/branches/don/topics", "backups/don_topics_%s.json" % (ts,))
+
+
 
 if __name__ == '__main__':
-    fdb = FireDB()
-    #fdb.dump()
-    fdb.backupUsers()
-    fdb.backupDB()
+    #transferProjs()
+    backup()
+
 
 
 
