@@ -150,6 +150,7 @@
 
         $(document).ready(async e => {
             pdb = new ProjectDB();
+            pdb.nextPage = "index.html";
             username = getParameterByName("username");
             tags = "core";
             pdb.allowEdits = (username != null);

@@ -149,10 +149,14 @@
         var pdb;
         var username;
         $(document).ready(async e => {
-            var opts = { projectsURL: "data/donProjects.json" };
-            opts = {};
+            //var opts = { projectsURL: "data/donProjects.json" };
+            //opts = {};
+            var opts = {dbRoot: "/branches/don/topics" }
+            //opts.dbRoot = "/topics";
             pdb = new ProjectDB(opts);
             //username = getParameterByName("username");
+            pdb.nextPage = "donkimber.html";
+            //pdb.editWindowName = "edits";
             pdb.allowEdits = false;
             var projectId = getParameterByName("projectId");
             //await pdb.layoutProjects({tags: "core"});
