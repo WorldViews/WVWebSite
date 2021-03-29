@@ -1,0 +1,417 @@
+<html lang="en"><head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-9MEYS9F6W2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9MEYS9F6W2');
+</script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>WorldViews</title>
+
+    <style>
+        .intro {
+            xxxbackground-color: rgb(208, 232, 253);
+            background-image: linear-gradient(rgb(145, 200, 248), aliceblue);
+            text-align: center;
+            padding-top: 30px;
+            padding-right: 15%;
+            padding-left: 15%;
+            padding-bottom: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        .proj-imgXXX {
+            width: 100%;
+            height: 200px;
+        }
+
+        body {
+            background-color: aliceblue;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .grid {
+            width: 98%;
+            xxborder-style: solid;
+            xxborder-width: 2px;
+            padding: 4px;
+            margin: 0 auto;
+            /* necessary for masonry to center cols */
+        }
+
+        #XXXprojectListDiv {
+            margin: 2px;
+            padding: 2px;
+        }
+
+        .grid-item {
+            width: 440px;
+            xwidth: 95%;
+            border-style: solid;
+            border-width: 2px;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            margin-left: 10px;
+            background-color: white;
+        }
+
+        /* this applies to images inside grid-items */
+        .grid-item img {
+            xxborder-style: solid;
+            xxborder-width: 3px;
+            border-radius: 5px;
+            margin-left: 15px;
+            margin-bottom: 15px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.js"></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/sprintf.js"></script>
+    <script src="js/Project.js"></script>
+</head>
+
+<body>
+    <header>
+    </header>
+    <main role="main">
+        <span style="float:right; padding:5px">
+            <span id="userInfo">guest</span>
+            &nbsp;&nbsp;
+            <button id="login">login</button>
+        </span>
+        <img src="images/holding-hands-heart-shaped-earth-t.png" style="float:left; width: 150px; margin:20px;">
+
+        <section class="intro">
+            <h1 style="font-size: xx-large;">Welcome to WorldViews</h1>
+            <p>
+                WorldViews was founded in 2015 with the vision of connecting people by helping
+                them share views, stories and adventures from around the world. Many WorldViews
+                projects and activities have involved 360 video, virtual earths, or remote telepresence
+                but our core mission is not fundamentally technological - it is to foster
+                mutual understanding and an appreciation that all of humanity is one family
+                sharing one Earth. Our core values are diversity, inclusivity, cooperation,
+                peacemaking and the spreading of love and inspiration. Organizationally we
+                are informal, with the feel of an educational club, oriented around play,
+                where members learn through involvement in WorldViews projects.
+            </p>
+
+        </section>
+    </main>
+    <section>
+        <center>
+            <h1>Projects &amp; Activities</h1>
+            These are some past and current WorldViews activities.
+        </center>
+        <p></p>
+        <div id="projectListDiv" class="grid" style="position: relative; width: 1000px; height: 4250.14px;">
+        <div class="grid-item" style="position: absolute; left: 4px; top: 4px;"><h3 class="proj-heading">The Garden</h3><p></p><p><img style="display: block; margin-left: auto; margin-right: auto;" src="images/gardenlogo.png" alt="" width="149" height="149"></p>
+<p>We call the WorldViews community and shared workspace <em>The Garden</em>.&nbsp; We chose this name for its connotations and the state of mind we want to encourage - one of organic growth, beauty, a place to feel relaxed and renewed.&nbsp; In The Garden, we have had talks, online cowork sessions, a zoom channel and slack workspace.&nbsp; But as we get past the Covid-19 pandemic, we look forward to having event's in actual gardens.&nbsp; &nbsp;We also anticipate projects with other garden based organizations, and one of our visions is connecting gardens around the world into a World Wide Garden.</p><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 4px;"><h3 class="proj-heading">TeleViewer</h3><p></p><p style="text-align: center;"><img style="float: right;" src="images/TeleViewer_biplane_small.jpg" alt="screen capture of televiewer" width="270" height="183"></p>
+<p>This activity is to build cool server and client software for furthering the WorldViews mission. All our software is open source, and built on open source. Currently the main efforts are building a client virtual earth browser called TeleViewer, which can show many layers of information, videos, and live video feeds. TeleViewer is built upon the open source CesiumJS. Another part of the current development is to develop a server to support many WorldViews capabilities. We currently support serving the TeleViewer using either nodejs, django, python flask, or a simple python server. We primarily are focusing on flask, and use the mongodb.</p><br></div><div class="grid-item" style="position: absolute; left: 4px; top: 494px;"><h3 class="proj-heading">Cecilia Computer School</h3><p></p><p><a href="https://limitlesshorizonsixil.org/"><img style="display: block; margin-left: auto; margin-right: auto;" src="https://limitlesshorizonsixil.org/wp-content/uploads/2013/11/Logo-with-tagline-for-website2.png"></a></p>
+<p>Cecilia Xinic lives in Chajul Guatamala, and is working on a master's degree in computer technology.&nbsp; She is the first in her family to attend college, and is also helping other students in her community, including through her work in a school computer lab. We were connected with Cecilia through the nonprofit organization Limitless Horizons, and are now helping to support her in her studies.&nbsp; We are planning a project together in which Cecilia will produce 360 video of her school and community which will be shown on the WorldViews website.</p>
+<p>Limitless Horizons Website: <a href="https://limitlesshorizonsixil.org/">https://limitlesshorizonsixil.org/</a></p>
+<p>&nbsp;</p><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 497px;"><h3 class="proj-heading">The Grand Canyon Adaptive Hike</h3><p></p><div id="i4c-draggable-container" style="position: fixed; z-index: 1499; width: 0px; height: 0px;">
+<div class="resolved" style="all: initial;" data-reactroot="">&nbsp;</div>
+</div>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://www.nps.gov/grca/planyourvisit/images/powell-pt-640.jpg?maxwidth=650&amp;autorotate=false" alt="Basic Information - Grand Canyon National Park (U.S. National Park ..." width="382" height="256"></p>
+<p>Enock and David Mills are in the planning stages of the first ever handcycle crossing of the Grand Canyon.&nbsp; They will be embarking on this adventure fall of 2021.&nbsp; Check back often to follow their progress.</p>
+<div id="i4c-dialogs-container">&nbsp;</div>
+<div id="i4c-dialogs-container">&nbsp;</div>
+<div id="i4c-dialogs-container">&nbsp;</div><br></div><div class="grid-item" style="position: absolute; left: 4px; top: 996px;"><h3 class="proj-heading">Kinetech Arts &amp; DanceHack</h3><p></p><p><img style="float: right;" src="images/dancehack_whirling.png" width="202" height="412"></p>
+<p>WorldViews has been involved with the Arts &amp; Technology nonprofit <a href="http://kinetecharts.org/">Kinetech Arts</a> since 2015, first through participation in <a href="http://www.dancehack.org/"><span class="SpellE">DanceHack</span></a>, and by Don Kimber serving on their board of directors since 2017.&nbsp; <span class="SpellE">DanceHack</span>&nbsp;<span class="GramE">teams</span> digital artists, technologists, musicians and dancers on performance projects.&nbsp;&nbsp;Our first project was with whirling dancer <a href="https://raquelsantiago.es/">Raquel Santiago</a>.&nbsp;&nbsp;Don created a 3D animation, expressing Raquel’s spiritual interpretation of her dancing together with a fabric simulation of her skirt, using three.js.&nbsp;&nbsp;A <span class="SpellE">blueto</span><span class="SpellE">oth</span> IMU sensor synchronized the animation with Raquel’s orientation as she danced.&nbsp;&nbsp;Another year, we captured 360 <span class="GramE">video</span>&nbsp;of dancers performing around a central cone.&nbsp;&nbsp;Live or recorded video projected onto the cone provided a panoramic display.&nbsp;&nbsp;This led to the patent of a Panoramic Portal device that could connect people at different locations through 360&nbsp;<span class="GramE">video</span>.&nbsp;&nbsp;A 2018 design study for a possible&nbsp;<span class="SpellE">DanceHack</span> project led to Reactive Video, in which a movement artist could perform with a video player that stayed synchronized with their movement.&nbsp;&nbsp;Don Kimber and Kinetech Art's Weidong Yang co-chaired the 2017 ACM Multimedia Interactive Art <span class="GramE">exhibition, and</span>&nbsp;hosted an&nbsp;<a href="https://sites.google.com/site/bammf2/past-bammf-1/10thbammf">Arts &amp; Tech event</a> for the Bay Area Multimedia Forum.</p><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 1058px;"><h3 class="proj-heading">Social Modeling and Simulations</h3><p></p><p style="font-weight: 400;"><img style="float: right;" src="images/social_sim.gif" width="213" height="252">In collaboration with <a href="https://www.usfca.edu/">USFCA</a>,&nbsp;<a href="https://www.kineviz.com/">Kineviz</a>&nbsp;and&nbsp;<a href="http://kinetecharts.org/">Kinetech Arts</a>, we're currently working on a system for agent based social modeling and simulation.&nbsp;&nbsp;We are building a JavaScript simulation engine with interfaces through <a href="https://observablehq.com/">ObservableHQ</a>&nbsp;and the Kineviz GraphXR visualization platform.&nbsp;&nbsp;A number of different models are under development, including for cognitive and emotional contagion (e.g.&nbsp;effect on happiness from random acts of kindness) and for spread of ideologies and polarization in social networks.&nbsp;&nbsp;We plan to explore models for both synthetic and real data sets.&nbsp;&nbsp;A&nbsp;short term&nbsp;goal is to describe and compare some different mechanisms that can account for ideological polarization - “the divide” of our current society, and how different social media affect this.&nbsp;&nbsp;The models will be available and used for interactive simulations, as well as by artists in the Kinetech Arts community for artistic performance or installation.</p>
+<p style="font-weight: 400;"><a href="https://observablehq.com/@donkimber/random-acts-of-kindness">Kindness Contagion Notebook</a></p>
+<p style="font-weight: 400;">&nbsp;</p>
+<p style="font-weight: 400;">&nbsp;</p><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 1749px;"><h3 class="proj-heading">Reactive Video</h3><p></p><p style="font-weight: 400;"><img style="float: right;" src="images/reactive_video.png" width="167" height="309">Standard video players have no user model, and simply play, pause, scrub, etc. in reaction to UI controls.&nbsp;&nbsp;Reactive video, like a good instructor, tracks the user, and plays the video in a manner appropriate to the user’s activity.&nbsp;&nbsp;For a physical training activity, say Tai Chi, the player synchronizes the video to match the user’s movement.&nbsp;&nbsp;One practical value of this is that the user&nbsp;doesn’t&nbsp;fuss so much with a UI to get the video to pause or repeat.&nbsp;&nbsp;An experiential value is that it changes video from a passive experience of watching and following, to one of being connected with the video, for a more immersive and engaging experience.&nbsp;&nbsp;The system uses a Kinect or&nbsp;OpenPose&nbsp;to track body movement for the reference training video and Kinect or&nbsp;Posenet&nbsp;for the live user. There are several use modes.&nbsp;&nbsp;In one, a user simply watches the video of a movement, and attempts to passively follow the movement.&nbsp;&nbsp;Subsets of tracked joints can be chosen and used to find a best alignment of user and reference movements (with adjustment made for different body sizes.)&nbsp;&nbsp;Visual indicators are drawn on the video to give feedback about alignment and to show the paths joints should follow, and changes made to a musical or soundscape background for feedback and motivation.&nbsp;&nbsp;Afterwards, graphs of the alignment as a function of time through a movement can be examined by the user or an instructor.</p>
+<p style="font-weight: 400;">&nbsp;</p>
+<p style="font-weight: 400;">UIST 2020, “Reactive Video: Adaptive Video Playback Based on User Motion for Supporting Physical Activity”, C. Clarke, D.&nbsp;Cavdir, P. Chiu, L.&nbsp;Denoue, D. Kimber.&nbsp;&nbsp;<a href="https://dl.acm.org/doi/abs/10.1145/3379337.3415591">paper</a>&nbsp;video:&nbsp;<a href="https://www.youtube.com/watch?v=pvlQZf7Rj2s&amp;t=123s">15min</a>&nbsp;<a href="https://www.youtube.com/watch?v=RqKe6NAZpko&amp;t=88s">5min</a></p>
+<p style="font-weight: 400;"><u>&nbsp;</u></p>
+<p style="font-weight: 400;">&nbsp;</p><br></div><div class="grid-item" style="position: absolute; left: 4px; top: 1750px;"><h3 class="proj-heading">RhythmSticks</h3><p></p><p style="font-weight: 400;"><img style="float: right;" src="images/rhythm_sticks.png" width="186" height="281">In collaboration with Derrick Kikuchi at Reach and Teach, and occupational therapist Sydney&nbsp;Shiroyama, who uses taiko drumming therapeutically for special needs clients and communities, I’m developing software and&nbsp;hardware based&nbsp;rhythm games.&nbsp;&nbsp;The core of the system is a MIDI based rhythm engine that can synchronize with users in playing rhythms.&nbsp;&nbsp;As with reactive video, there is a passive mode in which users follow a rhythm pattern and get feedback on how well they are doing.&nbsp;&nbsp;In another mode the system seeks to follow the flow of the user.&nbsp;&nbsp;The engine runs in a web page, shows the rhythm patterns radially as on a clock, and can play preset songs, or songs can be entered using drum languages of various drum communities, such as&nbsp;kuchi&nbsp;shoga&nbsp;for Taiko.&nbsp;&nbsp;The web page can&nbsp;be connected with&nbsp;midi devices, such as keyboards, drum pads, or devices designed for air drumming, such as&nbsp;<a href="https://www.senstroke.com/">senstroke</a>. It can also connect to and control external&nbsp;arduino&nbsp;devices, such as a “RhythmStick”, that has lights showing beats, and using an accelerometer to detect drum strokes.&nbsp;&nbsp;The system is on display at Reach and Teach, where Derrick is observing how users interact with it using drums in the store, such as the “sun moon star” drum pictured above.&nbsp;</p>
+<p style="font-weight: 400;">&nbsp;</p><br></div><div class="grid-item" style="position: absolute; left: 4px; top: 2446px;"><h3 class="proj-heading">MUSE</h3><p></p><p><img style="float: right;" src="images/imaginarium.png" width="300" height="200">MUSE is a high level vision with several key themes.&nbsp;&nbsp;One is to ‘move the web browser out of the display and into the room’.&nbsp;&nbsp;A MUSE venue is a virtual or real room (e.g. black box theatre) that is a sort of ‘program browser’ that can display exhibits, programs, games, support sharing of media content, for programs, games, simulations, etc.&nbsp; Together with high school science teacher Derrick McMillen, we created a venue called&nbsp;<em>Imaginarium</em>, which is an imaginary deck of a starship, with displays, controls, a central stage, and windows.&nbsp; The ceiling can be used as a planetarium to show immersive videos.&nbsp; We implemented a virtual imaginarium using threeJS and WebVR.&nbsp; &nbsp;We also set up a lab with imersive displays to be a physical imaginarium.<img src="float: right;" alt=""></p>
+<p>Our first detailed program was a presentation of the&nbsp;<a href="https://climatemusic.org/">ClimateMusic Project</a>&nbsp;performace of the composition&nbsp;<em>Climate</em>, by Erik Ian Walker.&nbsp; This emotionally powerful piece conveys climate changes from the year 1800 to present, with alternative projections up to the year 2200, based on different scenarios for reduction of CO<sub>2</sub>&nbsp;emissions.&nbsp; The program included visualizations of climate data - CO<sub>2</sub>&nbsp;levels, temperature, and energy balance, and users could interactively choose among visualizations. A basic animation was 3D animated graphs.&nbsp; Another was a virtual earth with color and opacity of atmosphere indicating temperate and CO<sub>2</sub>&nbsp;level, and particle streams indicationg energy balance.&nbsp; Another visualization was a dancer, producing streaming particle trails with color and density indicating data.&nbsp; In VR the participant could also dance and see particles streaming from their dancing.&nbsp; The VR program was demonstrated at a ClimateMusic event at the San Francisco opera center.&nbsp; In physical venue, at an FXPAL lab room, participants could dance and be tracked by a Kinect, and see the particles streaming from their avatar on the main display.</p>
+<p>The MUSE architecture emphasizes separation of media content of a program from the displays, speakers, stages, etc. of a venue in which the program is performed.&nbsp; Then during a performance, the channels are mapped to rendering devices.&nbsp; The mapping can be chosen automatically (e.g. with default video getting mapped onto the most prominent display), or these mappings can be explicitly set for a performance, or dynamically changed. This is similar in spirit to logically separating the data content of a web page from the fields and precise rendering styles in which it is displayed.</p><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 2661px;"><h3 class="proj-heading">Polly &amp; Remote Telepresence</h3><p></p><p style="font-weight: 400;"><img style="float: right;" src="images/polly.png" width="227" height="282">During years of working on 360 video, Don Kimber had always wanted to do a project where someone stuck in a hospital could connect to and control a robot with a 360 camera or a steerable camera.&nbsp;&nbsp;When he started working on such a project it occurred to him that he’d rather connect them with a human guide.&nbsp;&nbsp;The remote person could be like a parrot riding the guide’s shoulder.&nbsp;&nbsp;The Polly project implemented various incarnations of this idea, with the most advanced using a phone on a gimbal that could provide stabilization and view control.&nbsp;&nbsp;Guides carrying Polly devices and viewers could meet in a google hangout, and the remote participants could use an interface in the hangout to control the camera.&nbsp;&nbsp;A high point of this project was the chance to work with <a href="https://www.ted.com/talks/henry_evans_and_chad_jenkins_meet_the_robots_for_humanity?language=en">Henry Evans</a>&nbsp;and provide him with virtual tours.</p>
+<p style="font-weight: 400;">ACVR 2014, “Polly: Telepresence from a Guide’s Shoulder”, D. Kimber, P.&nbsp;Proppe, S. Kratz, J. Vaughan, B. Liew, D.&nbsp;Severns, W.&nbsp;Su.&nbsp;&nbsp;<a href="http://vigir.missouri.edu/~gdesouza/Research/Conference_CDs/ECCV_2014/workshops/w22/W22-44.pdf">pdf</a>&nbsp;&nbsp;<a href="https://www.youtube.com/watch?v=jnpGKvSGt4E">Henry Evans video</a>.</p><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 3301px;"><h3 class="proj-heading">360 Video Virtual Tours</h3><p></p><p style="font-weight: 400;"><img style="float: right;" src="images/virtual_tour.jpg" width="235" height="189">I’ve&nbsp;worked for m<img src="float:right;" alt="">any years on 360 video tours, where panoramic video is collected along paths and reindexed by position.&nbsp;&nbsp;This allows users to take virtual tours by moving along paths and looking in any direction.&nbsp;&nbsp;It’s similar to street view, or many types of 360 tours (e.g.&nbsp;QTVR) except the user can move forward or backward along a path, and see video of the movement, rather than transitions from one fixed point to another.&nbsp;&nbsp;Some versions of our viewer supported an HMD, and joystick control, and when users reached path intersections, they could seamlessly choose a path with the joystick.&nbsp;&nbsp;Mostly though,&nbsp;I’ve&nbsp;focused on web delivered virtual tours, viewable on screen, phone or tablet.&nbsp;&nbsp;The imaging technology has matured, and now high-quality video is easily captured with consumer cameras.&nbsp;&nbsp;The spatial imagining has also improved.&nbsp;&nbsp;Initially we used a combination of hand registration for indoor, and GPS for outdoor.&nbsp;&nbsp;Now GPS is ubiquitous, and phones can perform SLAM.&nbsp;&nbsp;Recently we used OpenVSLAM, which produces highly accurate spatial indices.&nbsp;&nbsp;Follow on projects in this area have been part of WorldViews and presented with its viewers.</p>
+<p style="font-weight: 400;">ACM MM 2001 “FlyAbout:Spatially&nbsp;Indexed Panoramic Video” D. Kimber, J. Foote, S. Lertsithichai.&nbsp;<a href="https://www.fxpal.com/publications/flyaboutspatially-indexed-panoramic-video.pdf">pdf</a>&nbsp;<a href="https://www.youtube.com/watch?v=NIziO0u7zsU">video</a></p><br></div><div class="grid-item" style="position: absolute; left: 4px; top: 3542px;"><h3 class="proj-heading">Mirror Worlds</h3><p></p><p style="font-weight: 400;"><img style="float: right;" src="images/mirror_worlds.gif" width="319" height="240">A mirror world is a virtual model of a real physical space, which may be updated with various sensors or data feeds to indicate things about the state of the world.&nbsp;&nbsp;It is like a living 3D map and has many uses.&nbsp;&nbsp;A mirror world of a conference venue may be used to market the venue, to plan for a conference, by presenters or conference attendees to plan presentations or itineraries.&nbsp;&nbsp;During the conference, it can be used as a portal for remote people to virtually attend the conference or can be used afterwards to show a recording of the conference.&nbsp;&nbsp;I’ve been involved in creating Mirror Worlds for several venues and locations, and platforms with several different 3D viewers - Google Earth, Unity3D, OpenSceneGraph and VRML.</p>
+<p style="font-weight: 400;">ACM MM2012&nbsp;&nbsp;“Through the Looking-Glass: Mirror Worlds for Augmented Awareness &amp; Capability”, D. Kimber, J.&nbsp;Shingu, J. Vaughan.&nbsp;&nbsp;&nbsp;<a href="https://www.fxpal.com/wp-content/uploads/2015/10/PR-12-806.pdf">pdf</a>&nbsp;<a href="https://www.youtube.com/watch?v=f_cT66P8C2I&amp;t=135s">video</a></p>
+<p style="font-weight: 400;">ACM MM2007, “DOTS: Support for Effective Video Surveillance”, A.&nbsp;Girgensohn, D. Kimber, J. Vaughan, T. Yang, F. Shipman, T. Turner, E.&nbsp;Rieffel, L. Wilcox, F.&nbsp;Chen&nbsp;and T. Dunnigan.&nbsp;<a href="https://www.fxpal.com/publications/dots-support-for-effective-video-surveillance-2.pdf">pdf</a>&nbsp;<a href="https://xfxpal.com/videos">video</a></p><br></div></div>
+        <!--  <input id="createProject" type="button" value="Add Project"> -->
+    </section>
+    <section>
+        <p style="height:30px"></p>
+        <center>
+            <h1>Collaborating Organizations</h1>
+            These are organizations we have had past or current collaborations with.
+        </center>
+        <p></p>
+        <div id="partners" class="grid" style="position: relative; width: 1000px; height: 1442.74px;">
+        <div class="grid-item" style="position: absolute; left: 4px; top: 4px;"><h3 class="proj-heading">Dance4Healing</h3><p></p><h2 class="section-heading text-uppercase"><img style="display: block; margin-left: auto; margin-right: auto;" src="http://dance4healing.com/sandbox/img/d4h/class3.jpg" width="369" height="205"></h2>
+<h2 class="section-heading text-uppercase">DANCE4HEALING</h2>
+<h4 class="section-subheading text-muted">Educating, empowering, and inspiring anyone to leverage technology to build healthy habits with creative arts in a fun, easy way.</h4>
+<p>See <a href="http://dance4healing.com/sandbox/index.html">Dance4Healing</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 4px;"><h3 class="proj-heading">Kinetech Arts</h3><p></p><p><img style="display: block; margin-left: auto; margin-right: auto;" src="http://static1.squarespace.com/static/579fed14b3db2b31eb589ca9/t/5e0f549f0eeb83355fdf9768/1592596783043/?format=1500w" alt="Kinetech Arts" width="376" height="51"></p>
+<p><strong>Kinetech Arts</strong>, directed by Daiane Lopes da Silva and Weidong Yang, is a 501(c)(3) non-profit organization that combines the work of dancers, scientists, and digital artists to create innovative and socially responsible performances. Kinetech Arts work has been supported by Zellerbach Family Foundation, CA$H Grant, The Phyllis C. Wattis Foundation, Rainin Foundation, and Creative Work Fund. Each year, KA produces multiple performances and over 50 other public events, including Open Labs, Y-Exchange public talks and Dance Hack Festivals. KA residencies includes RAW at SAFEhouse Arts, Combustible at CounterPulse and participation in the Dancing Lab: Immersive Media Through Cunningham at NCCAkron. KA is currently in residency at Djerassi Resident Artists Program and ODC Theatre from 2018-2021.</p><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 471px;"><h3 class="proj-heading">ClimateMusic Project</h3><p></p><p><a href="https://climatemusic.org/"><img src="https://climatemusic.org/wp-content/uploads/2019/04/ClimateMusic-Logo-blue.svg" alt="ClimateMusic" width="327" height="57"></a></p>
+<h2>We seek to make climate science&nbsp;<em>personal</em></h2>
+<p>Combining the talents and expertise of world class scientists, composers, musicians, artists, and technology visionaries, we enable the creation and staging of science-guided music and visual experiences to inspire people to engage actively on the issue of climate change.</p>
+<p>Music is familiar, accessible, and—for most people—much easier to relate to than articles or lectures about the climate crisis. We created The ClimateMusic Project to harness this universal language to tell the urgent story of climate change to broad and diverse audiences in a way that resonates, educates, and motivates.</p>
+<p>&nbsp;</p><br></div><div class="grid-item" style="position: absolute; left: 4px; top: 601px;"><h3 class="proj-heading">Reach and Teach</h3><p></p><p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://reachandteach.indiecommerce.com/sites/reachandteach.indiecommerce.com/files/rtlogo_books_toys_gifts1.jpg" alt="Home" width="327" height="151"></p>
+<p>We are San Mateo's independent bookstore and shop for unique products that transform you and the world. Everything at Reach and Teach is focused on Gender Equality, Sustainable Living, and Peacemaking. We offer books, toys, puzzles, games, green lifestyle products, teacher resources, and fair trade gifts for all ages.</p>
+<p>&nbsp;</p><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 1009px;"><h3 class="proj-heading">Paradox Sports</h3><p></p><div id="i4c-draggable-container" style="position: fixed; z-index: 1499; width: 0px; height: 0px;">
+<div class="resolved" style="all: initial;" data-reactroot="">&nbsp;</div>
+</div>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="images/Paradox-Blue-SQUARE-150x150-1.png" alt="" width="151" height="151"></p>
+<p>As a Paradox Sports ambassador Enock has had the opportunity to introduce climbing to many disabled people around the United States. Through the adaptive cimbing initiatve in partnership with The North Face, Paradox Sports has trained over 60 climbing gyms to facilitate adaptive climbing experiences.</p>
+<div id="i4c-dialogs-container">&nbsp;</div><br></div></div>
+    </section>
+    <section>
+        <p style="height:30px"></p>
+        <center>
+            <p>&nbsp;</p>
+            <h1>Inspirations</h1>
+            These are some projects and organizations that have inspired us and that
+            we hope to collaborate with on future activities.
+        </center>
+        <p></p>
+        <div id="inspirations" class="grid" style="position: relative; width: 1000px; height: 2009.05px;">
+        <div class="grid-item" style="position: absolute; left: 4px; top: 4px;"><h3 class="proj-heading">Taiko-IN</h3><p></p><section class="page-section
+    
+      layout-engine-section
+    
+    background-width--full-bleed
+    
+      section-height--medium
+    
+    
+      content-width--medium
+    
+    horizontal-alignment--center
+    vertical-alignment--middle
+     has-background
+    black" data-section-id="5ea75e018459fc1567a7c04d" data-controller="SectionWrapperController, MagicPaddingController" data-current-styles="{
+  &quot;backgroundImage&quot; : {
+    &quot;id&quot; : &quot;5ead0dcb534ec14df0a1f284&quot;,
+    &quot;recordType&quot; : 2,
+    &quot;addedOn&quot; : 1588399563606,
+    &quot;updatedOn&quot; : 1588399615962,
+    &quot;workflowState&quot; : 1,
+    &quot;publishOn&quot; : 1588399563606,
+    &quot;authorId&quot; : &quot;5ea7543756abda5093aa4fda&quot;,
+    &quot;systemDataId&quot; : &quot;1588399600764-NLV41LV5VC4LTL3WKRQP&quot;,
+    &quot;systemDataVariants&quot; : &quot;2500x1875,100w,300w,500w,750w,1000w,1500w,2500w&quot;,
+    &quot;systemDataSourceType&quot; : &quot;PNG&quot;,
+    &quot;filename&quot; : &quot;Hero Banner-2.png&quot;,
+    &quot;mediaFocalPoint&quot; : {
+      &quot;x&quot; : 0.5,
+      &quot;y&quot; : 0.5,
+      &quot;source&quot; : 3
+    },
+    &quot;colorData&quot; : {
+      &quot;topLeftAverage&quot; : &quot;fdfdfd&quot;,
+      &quot;topRightAverage&quot; : &quot;fefefe&quot;,
+      &quot;bottomLeftAverage&quot; : &quot;886857&quot;,
+      &quot;bottomRightAverage&quot; : &quot;9e8a71&quot;,
+      &quot;centerAverage&quot; : &quot;80554a&quot;,
+      &quot;suggestedBgColor&quot; : &quot;fafafa&quot;
+    },
+    &quot;urlId&quot; : &quot;fqpvphvdic6fkp5njuztooid4om1jq&quot;,
+    &quot;title&quot; : &quot;&quot;,
+    &quot;body&quot; : null,
+    &quot;likeCount&quot; : 0,
+    &quot;commentCount&quot; : 0,
+    &quot;publicCommentCount&quot; : 0,
+    &quot;commentState&quot; : 2,
+    &quot;unsaved&quot; : false,
+    &quot;author&quot; : {
+      &quot;id&quot; : &quot;5ea7543756abda5093aa4fda&quot;,
+      &quot;displayName&quot; : &quot;Sydney Shiroyama&quot;,
+      &quot;firstName&quot; : &quot;Sydney&quot;,
+      &quot;lastName&quot; : &quot;Shiroyama&quot;,
+      &quot;avatarUrl&quot; : &quot;https://static1.squarespace.com/static/images/5ea754375c18f20c0fcb6be8&quot;,
+      &quot;bio&quot; : &quot;&quot;,
+      &quot;avatarAssetUrl&quot; : &quot;https://static1.squarespace.com/static/images/5ea754375c18f20c0fcb6be8&quot;
+    },
+    &quot;assetUrl&quot; : &quot;https://images.squarespace-cdn.com/content/v1/5ea754888e2597681a594e03/1588399600764-NLV41LV5VC4LTL3WKRQP/ke17ZwdGBToddI8pDm48kDHPSfPanjkWqhH6pl6g5ph7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kT3PXaDTw6fk-7hFv8qtuO9cQCsc0TvODI6VkiZtuEfknLoiRIu-kWfCHsqWGB43w/Hero+Banner-2.png&quot;,
+    &quot;contentType&quot; : &quot;image/png&quot;,
+    &quot;items&quot; : [ ],
+    &quot;pushedServices&quot; : { },
+    &quot;pendingPushedServices&quot; : { },
+    &quot;recordTypeLabel&quot; : &quot;image&quot;,
+    &quot;originalSize&quot; : &quot;2500x1875&quot;
+  },
+  &quot;imageOverlayOpacity&quot; : 0.29,
+  &quot;video&quot; : {
+    &quot;playbackSpeed&quot; : 0.5,
+    &quot;filter&quot; : 1,
+    &quot;filterStrength&quot; : 0,
+    &quot;zoom&quot; : 0
+  },
+  &quot;backgroundWidth&quot; : &quot;background-width--full-bleed&quot;,
+  &quot;sectionHeight&quot; : &quot;section-height--medium&quot;,
+  &quot;customSectionHeight&quot; : 85,
+  &quot;horizontalAlignment&quot; : &quot;horizontal-alignment--center&quot;,
+  &quot;verticalAlignment&quot; : &quot;vertical-alignment--middle&quot;,
+  &quot;contentWidth&quot; : &quot;content-width--medium&quot;,
+  &quot;sectionTheme&quot; : &quot;black&quot;,
+  &quot;sectionAnimation&quot; : &quot;none&quot;,
+  &quot;backgroundMode&quot; : &quot;image&quot;
+}" data-animation="none" data-controllers-bound="SectionWrapperController, MagicPaddingController" data-active="true">
+<div class="section-background"><img style="display: block; margin-left: auto; margin-right: auto;" src="images/taikoin_logo.png" alt="" width="250" height="118"></div>
+<div class="section-background">
+<div class="section-background-overlay" data-controller="SectionBackgroundOverlayController" data-image-overlay-opacity="0.29" data-controllers-bound="SectionBackgroundOverlayController">TaikoIN’ stems from 4 intentions (<em><strong>I</strong></em>nterconnected, <em><strong>I</strong></em>n the moment, <em><strong>I</strong></em>nspiring, <em><strong>I</strong></em>nclusive) to grow an accepting community rooted in the philosophy and practice of taiko.&nbsp; It was founded in 2019 by Sydney Shiroyama and Eri Uchinda, and offers classes, workshops and online events.<img class="" style="float: right;" src="images/taikoin_hero_banner.png" alt="" width="220" height="120" data-src="https://images.squarespace-cdn.com/content/v1/5ea754888e2597681a594e03/1588399600764-NLV41LV5VC4LTL3WKRQP/ke17ZwdGBToddI8pDm48kDHPSfPanjkWqhH6pl6g5ph7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kT3PXaDTw6fk-7hFv8qtuO9cQCsc0TvODI6VkiZtuEfknLoiRIu-kWfCHsqWGB43w/Hero+Banner-2.png" data-image="https://images.squarespace-cdn.com/content/v1/5ea754888e2597681a594e03/1588399600764-NLV41LV5VC4LTL3WKRQP/ke17ZwdGBToddI8pDm48kDHPSfPanjkWqhH6pl6g5ph7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0kT3PXaDTw6fk-7hFv8qtuO9cQCsc0TvODI6VkiZtuEfknLoiRIu-kWfCHsqWGB43w/Hero+Banner-2.png" data-image-dimensions="2500x1875" data-image-focal-point="0.5,0.5" data-load="false" data-parent-ratio="1.2" data-image-resolution="1000w"></div>
+<div class="section-background-overlay" data-controller="SectionBackgroundOverlayController" data-image-overlay-opacity="0.29" data-controllers-bound="SectionBackgroundOverlayController">&nbsp;</div>
+</div>
+</section>
+<section class="page-section
+    
+      layout-engine-section
+    
+    background-width--full-bleed
+    
+      
+      
+    
+    
+      content-width--medium
+    
+    horizontal-alignment--center
+    vertical-alignment--middle
+    
+    " data-section-id="5ea75e018459fc1567a7c04f" data-controller="SectionWrapperController, MagicPaddingController" data-current-styles="{
+  &quot;imageOverlayOpacity&quot; : 0.15,
+  &quot;video&quot; : {
+    &quot;playbackSpeed&quot; : 0.5,
+    &quot;filter&quot; : 1,
+    &quot;filterStrength&quot; : 0,
+    &quot;zoom&quot; : 0
+  },
+  &quot;backgroundWidth&quot; : &quot;background-width--full-bleed&quot;,
+  &quot;sectionHeight&quot; : &quot;section-height--custom&quot;,
+  &quot;customSectionHeight&quot; : 45,
+  &quot;horizontalAlignment&quot; : &quot;horizontal-alignment--center&quot;,
+  &quot;verticalAlignment&quot; : &quot;vertical-alignment--middle&quot;,
+  &quot;contentWidth&quot; : &quot;content-width--medium&quot;,
+  &quot;sectionTheme&quot; : &quot;&quot;,
+  &quot;sectionAnimation&quot; : &quot;none&quot;,
+  &quot;backgroundMode&quot; : &quot;image&quot;
+}" data-animation="none" data-controllers-bound="SectionWrapperController, MagicPaddingController" data-active="true">
+<div class="section-background">Website: <a href="https://www.taiko-in.com/">https://www.taiko-in.com</a></div>
+</section><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 4px;"><h3 class="proj-heading">Planting Justice</h3><p></p><div id="i4c-draggable-container" style="position: fixed; z-index: 1499; width: 0px; height: 0px;">
+<div class="resolved" style="all: initial;" data-reactroot="">&nbsp;</div>
+</div>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://images.squarespace-cdn.com/content/v1/531f8717e4b0fcd5fdbf0e6f/1531867075009-LFVVXTJY9Y6XP3RX6FZO/ke17ZwdGBToddI8pDm48kL5VdYVlKyCDq3kfJ3hoZSlZw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZUJFbgE-7XRK3dMEBRBhUpwNGpxh-WAYFXjy0UmE-nnft2QW2Hz77nDM2hjrqnm4ORRoiD5g_uKOgf8UH8HqJwA/new.pjlogo_white_interior.png?format=300w" alt="new.pjlogo_white_interior.png" width="197" height="211"></p>
+<h4><a href="https://plantingjustice.org/">Planting Justice</a> is a grassroots organization with a mission to empower people impacted by mass incarceration and other social inequities with the skills and resources to cultivate food sovereignty, economic justice, and community healing.&nbsp;&nbsp;</h4>
+<div id="i4c-dialogs-container">&nbsp;</div><br></div><div class="grid-item" style="position: absolute; left: 4px; top: 469px;"><h3 class="proj-heading">ServiceSpace</h3><p></p><p><a href="https://www.servicespace.org/"><img style="color: #626262; display: block; margin-left: auto; margin-right: auto;" src="https://www.servicespace.org/images/logo/home.jpg" alt="image"></a></p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://www.servicespace.org/images/home_rotation/homeslide.jpg" alt="image" width="361" height="225"></p>
+<p>ServiceSpace is an organization run entirely by volunteers. We leverage technology to encourage everyday people around the world to do small acts of service. Our aim is to ignite the fundamental generosity in ourselves and others, creating both inner and outer transformation.</p>
+<p>ServiceSpace was conceived by volunteers, was built by volunteers, and is run by volunteers -- all for the benefit of volunteers. Our projects range from a daily positive news service, to an acts-of-kindness portal, to a gift-economy restaurant. Regardless of the endeavor, we act in concert to create service opportunities for each other and to support each other's service journeys.</p><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 492px;"><h3 class="proj-heading">Creatives for Compassionate Communities</h3><p></p><p><a href="https://www.facebook.com/pages/category/Arts---Humanities-Website/Creatives-for-Compassionate-Communities-108372904096772"><img style="display: block; margin-left: auto; margin-right: auto;" src="images/CCC.jpg" alt="Image may contain: text that says 'Incubating Creative, Compassionate Communities CREATIVES for COMPASSIONATE COMMUNITIES'" width="264" height="264"></a></p>
+<p>This group hosts varous community based transformative projects such as bright word mandala workshops.</p>
+<p>&nbsp;</p><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 1002px;"><h3 class="proj-heading">South Bay Beat Institute</h3><p></p><h2><img style="display: block; margin-left: auto; margin-right: auto;" src="https://images.squarespace-cdn.com/content/v1/5b71f58a365f028fe42c1455/1587857810676-4RVC3PNDSKXSJYYOVW0M/ke17ZwdGBToddI8pDm48kCDXzQYUSBTxiCpdvVd1PmB7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0qa3vtHVkxV52tP1hM2YGR3U6arEX0LJdXxy1oDxD71EtvDgcQ7gDFGzOgxPAf67pg/shirts-bonfire.png?format=500w" alt="For T-shirts, click here to go to our  Bonfire  store!" width="350" height="238"></h2>
+<h5>Whether you're 5 or 85, drumming is for you! Kids who participate in music education do better in school, have more self-confidence, and are more disciplined. Adults who take our classes find a valuable outlet for creative expression and a new community of friends.</h5>
+<h5>Our instructors have helped thousands of people of all ages and backgrounds find their inner drummer. Sign up for a class today!</h5><br></div><div class="grid-item" style="position: absolute; left: 4px; top: 1182px;"><h3 class="proj-heading">Taiko Peace</h3><p></p><p><a href="https://taikopeace.love"><img src="images/TaikoPeace-logo-FINAL-01.png" alt="" width="394" height="164"></a></p>
+<div id="block-5f21f7746e3499593d7f43ef" class="sqs-block html-block sqs-block-html" data-block-type="2">
+<div class="sqs-block-content">
+<h2 class="preSlide slideIn"><strong>May peace prevail on earth<br><br></strong></h2>
+</div>
+</div>
+<div id="block-yui_3_17_2_1_1596061511097_24753" class="sqs-block html-block sqs-block-html" data-block-type="2">
+<div class="sqs-block-content">
+<p class="preFade fadeIn">TaikoPeace is a movement started to spread the kinetic energy, spiritual vibration, and pure joy of Japanese taiko drumming for positive social change and a peaceful world.</p>
+</div>
+</div><br></div><div class="grid-item" style="position: absolute; left: 504px; top: 1542px;"><h3 class="proj-heading">Explore</h3><p></p><p><img style="display: block; margin-left: auto; margin-right: auto;" src="images/Explore.org-logo.png" alt="" width="370" height="82"><img style="float: right;" src="images/ExplorePic1.png" alt="" width="136" height="201">Explore.org offers many high quality live and recorded camera views from all around the world, with particular emphasis on animals and nature shots.&nbsp; The camera feeds are well curated and there is a procedure for people to joing as providers.</p>
+<p>Website: <a href="https://explore.org">https://explore.org</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p><br></div></div>
+    </section>
+    
+
+    <script>
+
+        var pdb;
+        var username;
+        var tags;
+
+        $(document).ready(async e => {
+            /************************************/
+            return;
+            /************************************/
+            pdb = new ProjectDB();
+            pdb.nextPage = "index.html";
+            username = getParameterByName("username");
+            tags = "core";
+            pdb.allowEdits = (username != null);
+            var projectId = getParameterByName("projectId");
+            await pdb.layoutProjects({ tags });
+            await pdb.layoutProjects({ tags: "partner", container: "#partners" });
+            await pdb.layoutProjects({ tags: "inspiration", container: "#inspirations" });
+
+            var columnWidth = 500;
+            //$('.grid').masonry({
+            $('#projectListDiv').masonry({
+                itemSelector: '.grid-item',
+                fitWidth: true,
+                columnWidth
+            });
+            var $grid = $('.grid').imagesLoaded(function () {
+                // init Masonry after all images have loaded
+                console.log("***** images Loaded ****");
+                //$('.grid').masonry({
+                $('#projectListDiv').masonry({
+                    itemSelector: '.grid-item',
+                    fitWidth: true,
+                    columnWidth
+                });
+            });
+
+            $('#partners').masonry({
+                itemSelector: '.grid-item',
+                fitWidth: true,
+                columnWidth
+            });
+            var $grid = $('.grid').imagesLoaded(function () {
+                // init Masonry after all images have loaded
+                console.log("***** images Loaded ****");
+                //$('.grid').masonry({
+                $('#partners').masonry({
+                    itemSelector: '.grid-item',
+                    fitWidth: true,
+                    columnWidth
+                });
+            });
+
+            $('#inspirations').masonry({
+                itemSelector: '.grid-item',
+                fitWidth: true,
+                columnWidth
+            });
+            var $grid = $('.grid').imagesLoaded(function () {
+                // init Masonry after all images have loaded
+                console.log("***** images Loaded ****");
+                //$('.grid').masonry({
+                $('#inspirations').masonry({
+                    itemSelector: '.grid-item',
+                    fitWidth: true,
+                    columnWidth
+                });
+            });
+
+        });
+
+    </script>
+
+
+
+</body></html>
