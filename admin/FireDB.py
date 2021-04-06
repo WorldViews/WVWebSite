@@ -106,6 +106,24 @@ class FireDB():
         ref = self.db.reference(root)
         ref.set(obj)
 
+    def migrate_0_0_to_0_1(self, srcRoot="/topics/projects/", dstRoot="/branches/v0_1/topics"):
+        projs = self.db.reference(srcRoot).get()
+        dstRef = self.db.reference(dstRoot)
+        for proj in projs:
+            print(proj)
+            id = proj['id']
+            print(id)
+            destPath = dstRoot+"/"+id
+            dstRef.child(id).set(proj)
+            print()
+            """
+            pid = dstRef.push()
+            proj['key'] = pid.key
+            print("key", pid.key)
+            pid.set(proj)
+            """
+
+    
 def transferProjs(dstRoot="/branches/don/topics/projects"):
     fdb = FireDB()
     projs = fdb.projects()
@@ -118,10 +136,15 @@ def backup():
     fdb.backupDB(jsonPath="backups/topics_%s.json" % (ts,))
     fdb.backupDB("/branches/don/topics", "backups/don_topics_%s.json" % (ts,))
 
+def migrate():
+    fdb = FireDB()
+    fdb.migrate_0_0_to_0_1()
+
 
 
 if __name__ == '__main__':
     #transferProjs()
+    #migrate()
     backup()
 
 
