@@ -1,0 +1,102 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue-masonry@0.11.3/dist/vue-masonry-plugin-window.js"></script>
+    <title>Vue Masonry Play App</title>
+    <style>
+        .myobj {
+            width:160px;
+            xheight:120px;
+            border-style:solid;
+            border-width:1px;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 15px;
+            background-color: bisque;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">{{title}}
+        <br>
+        <ul>
+            <li v-for="item in items">
+                {{item.name}}: {{item.title}}
+            </li>
+        </ul>
+        <!--
+        Another rendering
+        <template v-for="item in items">
+            <div>
+                {{item}}
+            </div>
+        </template>
+        -->
+        <div v-masonry="containerId" transition-duration="0.9s" item-selector=".item"
+            fit-width= "true"
+             style = "margin:auto; border-style:solid; border-width:0px; text-align:center">
+            <div v-masonry-tile class="item" v-for="(item, index) in items">
+                <div class="myobj">
+              {{item}}                </div>
+               <!-- block item markup -->
+ 
+            </div>
+        </div>
+        <button id="addOne">Add One</button>
+        <button id="change">Change</button>
+        <button id="clear">Clear</button>
+        <button id="bozo">Name it Bozo</button>
+
+    </div>
+    <script>
+
+        var VueMasonryPlugin = window["vue-masonry-plugin"].VueMasonryPlugin
+        Vue.use(VueMasonryPlugin);
+
+        var items = [
+            { name: "don", title: "imagineer" },
+            { name: "shawna", title: "senior villager" }
+        ];
+
+        for (var i=0; i<12; i++) {
+            var n=Math.floor(Math.random()*15);
+            var lines = [];
+            for (var j=0; j<n; j++)
+                lines.push("line "+j)
+            items.push({name: 'zombie'+i, title: 'master', lines});
+        }
+
+        const App = new Vue({
+            el: '#app',
+            data: {
+                title: "Vue Experiment",
+                items
+            },
+        });
+
+        $("#clear").click(e => {
+            console.log("clear");
+            // items.length = 0;
+            while (items.length > 0) { items.pop(); }
+            //items = [];
+        })
+        $("#addOne").click(e => {
+            items.push({ name: 'zorba', title: "king" })
+        });
+        $("#change").click(e => {
+            items[0].title += " bum";
+        });
+        $("#bozo").click(e => {
+            items[0].name = "bozo";
+        });
+
+    </script>
+</body>
+
+</html>
