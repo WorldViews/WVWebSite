@@ -37,17 +37,16 @@
         }
 
         .myobj {
-            width:400px;
-            xheight:120px;
-            border-style:solid;
-            border-width:1px;
+            width: 400px;
+            xheight: 120px;
+            border-style: solid;
+            border-width: 1px;
             padding: 10px;
             margin: 10px;
-            margin-top: 200px;
+            xxxmargin-top: 200px;
             border-radius: 15px;
             background-color: whitesmoke;
         }
-
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.js"></script>
@@ -61,8 +60,6 @@
     <script src="js/util.js"></script>
     <script src="js/sprintf.js"></script>
     <script src="js/WVTopicsDB.js"></script>
-    <style>
-    </style>
 </head>
 
 <body>
@@ -84,23 +81,28 @@
         <h2>{{title}}</h2>
         <div v-masonry="containerId" transition-duration="0.3s" item-selector=".item" fit-width="true"
             style="margin:auto; border-style:solid; border-width:0px;">
-            <div v-masonry-tile class="item" v-for="topic in getTopics()">
+            <div v-masonry-tile class="item" v-for="topic in getTopics()" :key="topic.id">
                 <div class="myobj">
                     {{topic.name}}
                     <div v-html="topic.description" v-bind:id="topic.id"></div>
                     <br>
-                    <div v-if="editState(topic.id) != 'edit'">
+                    <div v-if="editState(topic.id) != 'edit' && allowEdit(topic)">
                         <button @click="editTopic(topic,'edit')">Edit</button>
                     </div>
-                    <div v-else>
+                    <div v-if="editState(topic.id) == 'edit' && allowEdit(topic)">
                         Tags: {{ topic.tags }}
                         <button @click="editTopic(topic,'save')">Save</button>
                     </div>
                 </div>
             </div>
         </div>
+        <div v-if="allowEdit()">
+            <!--
+                <input id="createProject" type="button" value="Add Project">
+            -->
+            <button @click="createNewTopic()">New Topic</button>
+        </div>
     </div>
-    <input id="createProject" type="button" value="Add Project">
     <script>
         var VueMasonryPlugin = window["vue-masonry-plugin"].VueMasonryPlugin
         Vue.use(VueMasonryPlugin);
@@ -110,6 +112,11 @@
         var username;
         var tags;
         var items;
+
+        function onInitMCE(e) {
+            console.log("********** onInitMCE *********");
+            app.layout();
+        }
 
         function activateMCE(item) {
             let id = item.id;
@@ -137,6 +144,7 @@
                     { title: 'Test template 1', content: 'Test 1' },
                     { title: 'Test template 2', content: 'Test 2' }
                 ],
+                init_instance_callback: onInitMCE,
                 content_css: [
                     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
                     '//www.tinymce.com/css/codepen.min.css'
@@ -181,6 +189,9 @@
                     editstates
                 },
                 methods: {
+                    allowEdit: function(item) {
+                        return pdb.allowEdits;
+                    },
                     getTopics: function (opts) {
                         opts = opts || {};
                         var match = opts.contains;
@@ -190,18 +201,16 @@
                     },
                     editTopic: function (item, action) {
                         console.log("editTopic", item, action);
-                        if (action == "edit")
-                            activateMCE(item);
-                        else
-                            completeMCE(item);
                         editstates[item.id] = action;
-                        console.log("requesting redrawVueMasonry()");
-                        if (typeof this.$redrawVueMasonry === 'function') {
-                            console.log("looks like function");
+                        if (action == "edit") {
+                            activateMCE(item);
+                            // a re-layout is needed but will be
+                            // triggered by an initialization callback onInitMCE
                         }
-                        this.$redrawVueMasonry('containerId');
-                        //var itemsCopy = [... items];
-                        //this.updateItems(itemsCopy);
+                        else {
+                            completeMCE(item);
+                            setTimeout(() => this.layout(), 200);
+                        }
                     },
                     createNewTopic: () => {
                         console.log("createNewTopic");
@@ -218,9 +227,19 @@
                             items.push(items2[i]);
                             //Vue.set(app.items, i, items2[i]);
                         }
+                        //https://stackoverflow.com/questions/32106155/can-you-force-vue-js-to-reload-re-render
+                        // perhaps we should use computed property instead
+                        this.$forceUpdate();
                     },
-                    layout: function() {
+                    layout: function () {
+                        console.log("requesting redrawVueMasonry()");
+                        if (typeof this.$redrawVueMasonry === 'function') {
+                            console.log("looks like function");
+                        }
                         this.$redrawVueMasonry('containerId');
+                    },
+                    createNewTopic: function() {
+                        alert("Cannot yet create new projects");
                     }
                 }
             });

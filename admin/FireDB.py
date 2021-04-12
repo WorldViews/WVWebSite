@@ -144,8 +144,8 @@ def migrate():
 
 if __name__ == '__main__':
     #transferProjs()
-    #migrate()
-    backup()
+    migrate()
+    #backup()
 
 
 
