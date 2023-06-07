@@ -9,20 +9,68 @@
       height: 500px;
       border: solid black 2px;
     }
+
+    th {
+      width: 60px;
+      text-align: center;
+    }
+
+    td {
+      vertical-align: top;
+      text-align: center;
+    }
   </style>
 </head>
 
 <body>
   <h1>Bounded cumulative squared error</h1>
-  <div id="svgContainer"></div>
-
+  <button onclick="restart();">Restart</button>
+  &nbsp;
+  <button onclick="back();">Back</button>
+  <p></p>
+  <table>
+    <tr>
+      <td>
+        <div id="svgContainer"></div>
+      </td>
+      <td>
+        <div id="logDiv">Log</div>
+      </td>
+    </tr>
+  </table>
   <script>
+
+    // strict mode
+    "use strict";
+
     let boxX0 = 0;
     let boxY0 = -0.5;
     let boxWd = 1;
     let boxHt = 1;
     let mousePt = null;
     let points = [{ x: 0, y: 0 }, { x: 1, y: 0 }];
+    let trials = [];
+
+    function restart() {
+      points = [{ x: 0, y: 0 }, { x: 1, y: 0 }];
+      trials = [];
+      draw();
+      showStats();
+    }
+
+    function back() {
+      if (points.length <= 1) {
+        return;
+      }
+      // remove last element of points
+      // get last trial
+      let trial = trials.pop();
+      let i = trial.i;
+      // remove i'th element of points
+      points.splice(i + 1, 1);
+      draw();
+      showStats();
+    }
 
     function findPosition(x) {
       for (let i = 0; i < points.length - 1; i++) {
@@ -35,39 +83,84 @@
       return -1;
     }
 
+    function dist(x1, y1, x2, y2) {
+      let dx = x2 - x1;
+      let dy = y2 - y1;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    function area(x1, y1, x2, y2) {
+      let xt = (x1 + x2) / 2 - (y1 - y2) / 2;
+      let yt = y1 + xt - x1;
+      let xb = (x1 + x2) / 2 + (y1 - y2) / 2;
+      let yb = y1 - xb + x1;
+      let a = dist(x1, y1, xt, yt);
+      let b = dist(x1, y1, xb, yb);
+      return a * b;
+    }
+
+    function totalArea() {
+      let areaSum = 0;
+      for (let i = 0; i < points.length - 1; i++) {
+        let p0 = points[i];
+        let p1 = points[i + 1];
+        let a = area(p0.x, p0.y, p1.x, p1.y);
+        areaSum += a;
+      }
+      return areaSum;
+    }
+
+    function findBox(x, y) {
+      for (let i = 0; i < points.length - 1; i++) {
+        let p0 = points[i];
+        let p1 = points[i + 1];
+        if (!(p0.x <= x && x <= p1.x)) {
+          continue;
+        }
+        let w = p1.x - p0.x;
+        let dx = x - p0.x;
+        let f = dx / w;
+        let ylin = p0.y + f * (p1.y - p0.y);
+        let inrange = (Math.abs(y - p0.y) <= dx) &&
+          (Math.abs(y - p1.y) <= (p1.x - x));
+        return { i, p0, p1, x, y, ylin, inrange };
+      }
+      return null;
+    }
+
     function poly(x1, y1, x2, y2, x3, y3, x4, y4) {
       var svg =
         `<polygon points="${x1},${y1} ${x2},${y2} ${x3},${y3} ${x4},${y4}"
                 fill="none" stroke="black" stroke-width="0.002" />`;
-      console.log("poly:", svg);
+      //console.log("poly:", svg);
       return svg;
     }
 
     // draw line
-    function line(p0, p1) {
+    function line(p0, p1, color = "blue") {
       var svg =
         `<line x1="${p0.x}" y1="${p0.y}" x2="${p1.x}" y2="${p1.y}"
-               stroke="blue" stroke-width="0.002" />`;
-      console.log("line:", svg);
+               stroke="${color}" stroke-width="0.002" />`;
+      //console.log("line:", svg);
       return svg;
     }
 
-    function drawCircle(pt) {
+    function circle(pt, color = "black") {
       var svg =
-        `<circle cx="${pt.x}" cy="${pt.y}" r="0.01" fill="red" />`;
-      console.log("circle:", svg);
+        `<circle cx="${pt.x}" cy="${pt.y}" r="0.01" fill="${color}" />`;
+      //console.log("circle:", svg);
       return svg;
     }
 
     function linbox(x1, y1, x2, y2) {
-      xt = (x1 + x2) / 2 - (y1 - y2) / 2;
-      yt = y1 + xt - x1;
-      xb = (x1 + x2) / 2 + (y1 - y2) / 2;
-      yb = y1 - xb + x1;
+      let xt = (x1 + x2) / 2 - (y1 - y2) / 2;
+      let yt = y1 + xt - x1;
+      let xb = (x1 + x2) / 2 + (y1 - y2) / 2;
+      let yb = y1 - xb + x1;
       return poly(x1, y1, xt, yt, x2, y2, xb, yb);
     }
 
-    function drawBoxes() {
+    function draw() {
       console.log("", points);
       var svg = `<svg xmlns="http://www.w3.org/2000/svg"
                     width="100%" height="100%"
@@ -80,12 +173,55 @@
         svg += line(p0, p1);
       }
       if (mousePt) {
-        svg += drawCircle(mousePt);
+        let box = findBox(mousePt.x, mousePt.y);
+        let color = box.inrange ? "black" : "red";
+        if (box.inrange) {
+          svg += line(mousePt, { x: mousePt.x, y: box.ylin }, "red");
+        }
+        svg += circle(mousePt, color);
       }
+      trials.forEach(trial => {
+        svg += line(trial, { x: trial.x, y: trial.ylin }, "red");
+      })
       svg += `</svg>\n`;
 
-      console.log("svg:", svg);
+      //console.log("svg:", svg);
       document.getElementById('svgContainer').innerHTML = svg;
+    }
+
+    function showStats() {
+      console.log("showStats");
+      let log = document.getElementById('logDiv');
+      let table = `<table>
+        <tr>
+        <th>n</th>
+        <th>x</th>
+        <th>y</th>
+        <th>ylin</th>
+        <th>err</th>
+        </tr>
+        `;
+      let e2sum = 0;
+      let d = 5;
+      for (let i = 0; i < trials.length; i++) {
+        let trial = trials[i];
+        let e = trial.y - trial.ylin;
+        let e2 = e * e;
+        e2sum += e2;
+        table += `<tr>
+          <td>${i + 1}</td>
+          <td> ${trial.x.toFixed(d)}    </td>
+          <td> ${trial.y.toFixed(d)}    </td>
+          <td> ${trial.ylin.toFixed(d)} </td>
+          <td> ${e2.toFixed(d)}         </td>
+          </tr>
+          `;
+      }
+      table += `</table>\n<p>\n`;
+      table += `Total Error: ${e2sum.toFixed(d)} <br>`;
+      table += `Remaining Area: ${totalArea().toFixed(d)}`;
+      console.log("table:", table);
+      log.innerHTML = table;
     }
 
     function handleClick(event) {
@@ -94,14 +230,15 @@
       var svgRect = svgContainer.getBoundingClientRect();
       var x = ((event.clientX - svgRect.left) / svgRect.width) * boxWd - boxX0;
       var y = ((event.clientY - svgRect.top) / svgRect.height) * boxHt + boxY0;
-      console.log("Clicked point coordinates: ", x, y);
-      let i = findPosition(x);
-      if (i >= 0) {
-        points.splice(i + 1, 0, { x, y });
-      } else {
-        points.push({ x, y })
+      //console.log("Clicked point coordinates: ", x, y);
+      let box = findBox(x, y);
+      console.log("box", box);
+      if (box && box.inrange) {
+        points.splice(box.i + 1, 0, { x, y });
+        trials.push({ x, y, ylin: box.ylin, i: box.i });
       }
-      drawBoxes();
+      draw();
+      showStats();
     }
 
     function handleMouseMove(event) {
@@ -111,13 +248,14 @@
       var y = ((event.clientY - svgRect.top) / svgRect.height) * boxHt + boxY0;
       mousePt = { x, y };
       console.log("Mouse point coordinates: ", x, y);
-      drawBoxes();
+      draw();
     }
 
     document.getElementById('svgContainer').addEventListener('click', handleClick);
     // add event handler for mouse move
-    document.getElementById('svgContainer').addEventListener('mousemove', handleMouseMove); 
-    drawBoxes();
+    document.getElementById('svgContainer').addEventListener('mousemove', handleMouseMove);
+    draw();
+    showStats();
   </script>
 </body>
 
