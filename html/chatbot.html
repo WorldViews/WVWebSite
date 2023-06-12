@@ -4,19 +4,32 @@
 <head>
     <title>Chat bot</title>
     <style>
+        #chatlog {
+            xborder: 1px solid black;
+            width: 90%;
+            height: 80%;
+            overflow: auto;
+        }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
-    <h1>My Chatbot</h1>
+    <h1 id="header">Chat</h1>
+    <div id="chatlog">
+    </div>
+    <p></p>
     <div id="chatbox">
-        <input id="chatinput" type="text" />
+        <textarea id="chatinput" rows="3" cols="60"></textarea>
+        &nbsp;&nbsp;&nbsp;
         <button onclick="go();">Send</button>
         &nbsp;&nbsp;&nbsp;
         <button onclick="clearChat();">Clear</button>
-    </div>
-    <div id="chatlog">
+        &nbsp;&nbsp;&nbsp;
+        <select id="agent">
+            <option value="Alan Watts">Alan Watts</option>
+            <option value="12 Step Joe">12 Step Joe</option>
+        </select>        
     </div>
     <script>
         // strict mode
@@ -29,8 +42,21 @@
 
         let prompts = {};
         prompts["Alan Watts"] = [
+            {role: "system",
+            content: `you are a chatbot pretending to be a 12 step or emotions anonymous sponsor.
+You will engage in any dialogue with the user as if you were a sponsor or another 12 step member.
+You will exchange 4 sms messages with the user.  On your final message, you will make an excuse to end the conversation.
+Your last word will be Goodbye.  Begin the conversation with the user.`}
+        ];
 
-        ]
+        prompts["12 Step Joe"] = [
+        {role: "system",
+            content: `you are a chatbot pretending to be a 12 step or emotions anonymous sponsor.
+You will engage in any dialogue with the user as if you were a sponsor or another 12 step member.
+You will exchange 4 sms messages with the user.  On your final message, you will make an excuse to end the conversation.
+Your last word will be Goodbye.  Begin the conversation with the user.`}
+        ];
+
 
         // get the localstorage as a json object
         function getChatObj() {
@@ -38,10 +64,23 @@
             // if the chatbot object is null, create a new one
             if (chatObj == null) {
                 chatObj = {
+                    botName: botName,
                     "chatlog": []
                 };
             }
+            if (chatObj.botName == null) {
+                chatObj.botName = botName;
+            }
             return chatObj;
+        }
+
+        function setAgent() {
+            console.log("setAgent");
+            let name = $("#agent").val();
+            botName = name;
+            console.log("botName", botName);
+            $("#header").html("Chat with "+name);
+            clearChat();
         }
 
         // save chatObj to localstorage
@@ -56,6 +95,7 @@
             $("#chatlog").html("");
             // clear the chatObj
             chatObj.chatlog = [];
+            chatObj.botName = botName;
             // save the chatObj to localstorage
             saveChatObj(chatObj);
         }
@@ -65,6 +105,8 @@
             handleUserInput();
         }
 
+        // get input text user has typed, send it to openai
+        // display response and save response in local storage.
         async function handleUserInput() {
             // get the text from the chatinput
             let text = $("#chatinput").val();
@@ -72,16 +114,16 @@
                 return;
             }
             // append text to chatlog
-            $("#chatlog").append(`<p>${text}</p>\n`);
-            chatObj.chatlog.push(text);
+            $("#chatlog").append(`<p><i>user: </i>${text}</p>\n`);
+            chatObj.chatlog.push({role: "user", content: text});
             // now ask openai for a response
             response = await callOpenAI(text);
             //let replyText = response.choices[0].text;
             let replyText = response.choices[0].message.content;
             // append text to chatlog
-            $("#chatlog").append(`<p>${replyText}</p>\n`);
+            $("#chatlog").append(`<p><i>assistant: </i>${replyText}</p>\n`);
             // add text to chatObj
-            chatObj.chatlog.push(replyText);
+            chatObj.chatlog.push({role: "assistant", content: replyText});
             // save chatObj to localstorage
             saveChatObj(chatObj);
             $("#chatinput").val("");
@@ -92,12 +134,15 @@
         // use the v1/chat/completions endpoint
         async function callOpenAI(user_input) {
             let model = "gpt-3.5-turbo";
-            let messages = [
-                { "role": "system", "content": "You are a helpful assistant." },
-                { "role": "user", "content": "Who won the world series in 2020?" },
-                { "role": "assistant", "content": "The Los Angeles Dodgers won the World Series in 2020." },
-                { "role": "user", "content": user_input }
-            ];
+            // make messages a clone of 
+            let messages = JSON.parse(JSON.stringify(prompts[botName]));
+            // append user input to messages
+            // append messages in chatlog to messages
+            for (let i = 0; i < chatObj.chatlog.length; i++) {
+                messages.push(chatObj.chatlog[i]);
+            }
+            messages.push({ "role": "user", "content": user_input });
+            console.log("messages:", JSON.stringify(messages, null, 2 ));
             let rep = await fetch("https://api.openai.com/v1/chat/completions", {
                 method: "POST",
                 headers: {
@@ -149,10 +194,14 @@
         $(document).ready(function () {
             // get the chatbot object from localstorage
             chatObj = getChatObj();
+            botName = chatObj.botName;
+            $("#agent").val(botName);
+            $("#header").html(`Chat with ${botName}`);
             // for each item in the chatlog
             for (let i = 0; i < chatObj.chatlog.length; i++) {
                 // append the item to the chatlog div
-                $("#chatlog").append(`<p>${chatObj.chatlog[i]}</p>\n`);
+                let msg = chatObj.chatlog[i];
+                $("#chatlog").append(`<p><i>${msg.role}:</i> ${msg.content}</p>\n`);
             }
             // when the user presses enter in the chatinput
             $("#chatinput").keypress(function (e) {
@@ -160,6 +209,10 @@
                 if (e.which == 13) {
                     handleUserInput();
                 }
+            });
+            // when the user chooses a new agent
+            $("#agent").change(function () {
+                setAgent();
             });
         });
 
