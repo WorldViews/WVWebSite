@@ -101,48 +101,15 @@
         <img src="images/holding-hands-heart-shaped-earth-t.png" style="float:left; width: 150px; margin:20px;">
 
         <section class="intro">
-            <h1 style="font-size: xx-large;">Welcome to WorldViews</h1>
-            <p>
-                WorldViews was founded in 2015 with the vision of connecting people by helping
-                them share views, stories and adventures from around the world. Many WorldViews
-                projects and activities have involved 360 video, virtual earths, or remote telepresence
-                but our core mission is not fundamentally technological - it is to foster
-                mutual understanding and an appreciation that all of humanity is one family
-                sharing one Earth. Our core values are diversity, inclusivity, cooperation,
-                peacemaking and the spreading of love and inspiration. Organizationally we
-                are informal, with the feel of an educational club, oriented around play,
-                where members learn through involvement in WorldViews projects.
-            </p>
-
+            <h1 style="font-size: xx-large;">Wordside Word Garden</h1>
+ 
         </section>
     </main>
-    <section>
-        <center>
-            <h1>Projects & Activities</h1>
-            These are some past and current WorldViews activities.
-        </center>
-        <p></p>
-        <div id="projectListDiv" class="grid">
-        </div>
-        <!--  <input id="createProject" type="button" value="Add Project"> -->
-    </section>
-    <section>
-        <p style="height:30px"></p>
-        <center>
-            <h1>Collaborating Organizations</h1>
-            These are organizations we have had past or current collaborations with.
-        </center>
-        <p></p>
-        <div id="partners" class="grid">
-        </div>
-    </section>
     <section>
         <p style="height:30px"></p>
         <center>
             <p>&nbsp</p>
-            <h1>Inspirations</h1>
-            These are some projects and organizations that have inspired us and that
-            we hope to collaborate with on future activities.
+            <h1>Poems</h1>
         </center>
         <p></p>
         <div id="inspirations" class="grid">
@@ -163,8 +130,6 @@
             tags = "core";
             pdb.allowEdits = (username != null);
             var projectId = getParameterByName("projectId");
-            //await pdb.layoutProjects({ tags });
-            //await pdb.layoutProjects({ tags: "partner", container: "#partners" });
             await pdb.layoutProjects({ tags: "poem", container: "#inspirations" });
 
             var columnWidth = 500;
@@ -185,6 +150,7 @@
                 });
             });
 
+            /*
             $('#partners').masonry({
                 itemSelector: '.grid-item',
                 fitWidth: true,
@@ -200,7 +166,8 @@
                     columnWidth
                 });
             });
-
+            */
+           
             $('#inspirations').masonry({
                 itemSelector: '.grid-item',
                 fitWidth: true,
